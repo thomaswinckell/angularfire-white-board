@@ -1,7 +1,7 @@
-app.service('WhiteBoardService', function (URL_DATABASE, $firebase) {
+app.service('WhiteBoardService', function (FIREBASE_URL, $firebase) {
 
-    var indexMaxComponentRef = new Firebase(URL_DATABASE + 'whiteBoard/indexMaxComponent');
-    var componentsRef = new Firebase(URL_DATABASE + 'whiteBoard/components');
+    var indexMaxComponentRef = new Firebase(FIREBASE_URL + 'whiteBoard/indexMaxComponent');
+    var componentsRef = new Firebase(FIREBASE_URL + 'whiteBoard/components');
     var lastComponentRefAddedByCurrentUser = null;
 
     var indexMaxComponent;

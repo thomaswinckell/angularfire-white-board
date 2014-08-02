@@ -1,6 +1,6 @@
-app.service('UserService', function (URL_DATABASE, $firebase) {
+app.service('UserService', function (FIREBASE_URL, $firebase) {
 
-    var connectedUsersRef = new Firebase(URL_DATABASE + 'whiteBoard/connectedUsers');
+    var connectedUsersRef = new Firebase(FIREBASE_URL + 'whiteBoard/connectedUsers');
     this.userRef = null;
 
     this.setCurrentUser = function(user) {

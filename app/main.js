@@ -21,13 +21,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		});
 });
 
-app.run(function ($rootScope, $state, UserService, URL_DATABASE, AUTHENTICATION) {
+app.run(function ($rootScope, $state, UserService, FIREBASE_URL, AUTHENTICATION) {
 
 	$rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
 
         if (AUTHENTICATION.enabled) {
 
-            $rootScope.firebaseAuth = new FirebaseSimpleLogin(new Firebase(URL_DATABASE), function (error, user) {
+            $rootScope.firebaseAuth = new FirebaseSimpleLogin(new Firebase(FIREBASE_URL), function (error, user) {
 
                 if (error) {
 
