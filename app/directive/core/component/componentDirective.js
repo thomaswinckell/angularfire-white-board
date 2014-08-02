@@ -9,7 +9,6 @@ app.directive('component', function() {
         replace: true,
         templateUrl: 'app/directive/core/component/componentTemplate.html',
         link: function(scope, element, attrs) {
-            $(element).resizable();
         },
         controller: function($scope) {
         }
