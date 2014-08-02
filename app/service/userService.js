@@ -4,7 +4,7 @@ app.service('UserService', function (FIREBASE_URL, $firebase) {
     this.userRef = null;
 
     this.setCurrentUser = function(user) {
-        this.userRef = connectedUsersRef.push({name : user.thirdPartyUserData.name});
+        this.userRef = connectedUsersRef.push(user);
         this.userRef.onDisconnect().remove();
     };
 

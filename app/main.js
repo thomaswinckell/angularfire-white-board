@@ -35,7 +35,7 @@ app.run(function ($rootScope, $state, UserService, FIREBASE_URL, AUTHENTICATION)
 
                 } else if (user) {
 
-                    UserService.setCurrentUser(user);
+                    UserService.setCurrentUser({name : user.thirdPartyUserData.name});
 
                     if (toState.name == 'root.login')
                         $state.go('root.whiteBoard');
@@ -44,6 +44,8 @@ app.run(function ($rootScope, $state, UserService, FIREBASE_URL, AUTHENTICATION)
                     $state.go('root.login');
                 }
             });
+        } else {
+            UserService.setCurrentUser({name : "Guest"});
         }
     });
 

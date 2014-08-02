@@ -1,4 +1,4 @@
-app.constant("FIREBASE_URL", YOUR_FIREBASE_URL);
+app.constant("FIREBASE_URL",'https://brilliant-fire-7355.firebaseio.com/');
 
 app.constant("AUTHENTICATION", {
     enabled : false,
