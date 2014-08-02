@@ -1,0 +1,8 @@
+angular                         v1.2.21
+angularfire                     v0.7.1
+bootstrap                       v3.2.0
+firebase                        v1.06
+firebase-simple-login           v1.3.0
+jquery                          v1.11.1
+jquery-ui                       v1.11.0
+underscore                      v1.6.0

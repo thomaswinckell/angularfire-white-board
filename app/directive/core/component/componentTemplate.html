@@ -1,0 +1,6 @@
+<div class="component thumbnail"
+     ng-dblclick="onEnterEditMode($event)"
+     ng-class="{'selected' : isSelected, 'dragging' : isDragging }"
+     ng-style="{ height: component.height + 'px', width: component.width + 'px', 'z-index': isSelected ? 9999 : component.index }"
+     is-visible="!isEditMode" ng-transclude>
+</div>

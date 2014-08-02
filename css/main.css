@@ -1,0 +1,77 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    margin-top: 60px;
+}
+
+div[ui-view] {
+    height: 100%;
+}
+
+#whiteboard {
+    min-height: 100%;
+    position: relative;
+}
+
+.not-visible {
+    opacity: 0;
+}
+
+.container{
+    max-width: none !important;
+    width: 970px;
+}
+
+textarea {
+    resize: none;
+}
+
+
+/* Resizer */
+
+.resizer {
+    position: absolute;
+    opacity: 0;
+}
+
+.resizer-width:hover {
+    cursor: e-resize;
+}
+
+.resizer-height:hover {
+    cursor: n-resize;
+}
+
+.resizer-width.resizer-height:hover {
+    cursor: nwse-resize;
+    opacity: 1;
+}
+
+/* Component */
+
+.container-component {
+    position: absolute;
+}
+
+.component {
+    word-break: break-word;
+    position: absolute;
+    top:0;
+    left:0;
+}
+
+.component.selected {
+    border: 1px solid black;
+}
+
+.component {
+    cursor: pointer;
+}
+
+.component-editor {
+    position: absolute;
+    top:0;
+    left:0;
+}

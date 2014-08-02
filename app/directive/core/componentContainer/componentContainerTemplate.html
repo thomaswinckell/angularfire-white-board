@@ -1,0 +1,25 @@
+<div class="container-component"
+     id="{{componentKey}}"
+     ng-style="{ left: component.x, top: component.y }" >
+
+    <div ng-transclude>
+    </div>
+
+    <div class="resizer resizer-width"
+        ng-style="{'z-index': isSelected ? 9999 : component.index,
+            left: component.width - 5, top: 0,
+            width: '5px', height: (component.height - 30) + 'px' }">
+    </div>
+
+    <div class="resizer resizer-height"
+         ng-style="{'z-index': isSelected ? 9999 : component.index,
+            left: 0, top: component.height - 5,
+            width: (component.width - 30) + 'px', height: '5px' }">
+    </div>
+
+    <div class="resizer resizer-width resizer-height"
+         ng-style="{'z-index': isSelected ? 9999 : component.index,
+            left: component.width - 30, top: component.height - 30,
+            width:'30px', height: '30px' }">
+    </div>
+</div>

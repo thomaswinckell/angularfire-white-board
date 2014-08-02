@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap-theme.css">
+
+    <link rel="stylesheet" href="css/main.css" type="text/css"/>
+
+
+    <script src='lib/firebase/firebase.js'></script>
+    <script src='lib/firebase/firebase-simple-login.js'></script>
+    <script src='lib/jquery/jquery.js'></script>
+    <script src='lib/jquery-ui/jquery-ui.min.js'></script>
+    <script src="lib/angular/angular.js"></script>
+    <script src="lib/angular/angularfire.js"></script>
+    <script src="lib/angular/angular-ui-router.js"></script>
+    <script src="lib/underscore/underscore.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.js"></script>
+
+  </head>
+
+  <body ng-app="app">
+
+    <div ui-view></div>
+
+    <script src="app/main.js"></script>
+
+    <script src="app/config/mainConfig.js"></script>
+
+    <script src="app/service/whiteBoardService.js"></script>
+    <script src="app/service/userService.js"></script>
+
+    <script src="app/controller/loginController.js"></script>
+    <script src="app/controller/whiteBoardController.js"></script>
+
+    <script src="app/filter/cleanFirebaseObject.js"></script>
+
+    <script src="app/directive/core/componentEditor/componentEditorDirective.js"></script>
+    <script src="app/directive/core/component/componentDirective.js"></script>
+    <script src="app/directive/core/componentContainer/componentContainerDirective.js"></script>
+    <script src="app/directive/component/text/textDirective.js"></script>
+    <script src="app/directive/component/textEditor/textEditorDirective.js"></script>
+    <script src="app/directive/core/isVisible/isVisibleDirective.js"></script>
+
+  </body>
+</html>
