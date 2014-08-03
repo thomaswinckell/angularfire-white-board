@@ -1,4 +1,4 @@
-app.constant("FIREBASE_URL", YOUR_DATABASE_URL;
+app.constant("FIREBASE_URL", YOUR_DATABASE_URL);
 
 app.constant("AUTHENTICATION", {
     enabled : false,
