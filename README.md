@@ -1,7 +1,7 @@
 angularfire-white-board
 =======================
 
-An ultra dynamic white board made with angularJS and firebase.
+A dynamic white board made with angularJS and firebase.
 
 Live demo
 =========
