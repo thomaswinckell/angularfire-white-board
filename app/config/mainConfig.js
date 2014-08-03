@@ -1,4 +1,4 @@
-app.constant("FIREBASE_URL",YOUR_DATABASE_URL);
+app.constant("FIREBASE_URL",'https://brilliant-fire-7355.firebaseio.com/');
 
 app.constant("AUTHENTICATION", {
     enabled : false,
@@ -10,7 +10,7 @@ app.constant("AUTHENTICATION", {
     }
 });
 
-app.constant("TEXT_COMPONENT_PROPERTIES", {
+app.constant("COMPONENT_PROPERTIES", {
     MIN_HEIGHT: 100,
     MIN_WIDTH: 100
 });

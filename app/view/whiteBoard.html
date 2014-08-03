@@ -1,64 +1,20 @@
-<!--<div id="navbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">White Board</a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Add<span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li class="dropdown-header">Components</li>
-                        <li><a href="" ng-click="addText()">Text</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Test</li>
-                        <li><a href="">Test</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle">
-                        {{nbConnectedUsers | json}} user{{(connectedUsers>1)?'s':''}} connected
-                    </a>
-                </li>
-            </ul>
-
-        </div>
-    </div>
-</div>-->
-
 <div id="navbar" class="navbar navbar-default navbar-fixed-top">
 
     <div class="navbar-header pull-left">
         <a class="navbar-brand" href="#">White Board</a>
     </div>
 
-    <div class="navbar-header pull-left">
-            <div class="dropdown">
-                <a href="" class="dropdown-toggle" data-toggle="dropdown">Add<span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                    <li class="dropdown-header">Components</li>
-                    <li><a href="" ng-click="addText()">Text</a></li>
-                    <li class="divider"></li>
-                    <li class="dropdown-header">Test</li>
-                    <li><a href="">Test</a></li>
-                </ul>
-            </div>
+    <div class="navbar-header pull-left" style="margin-top: 8px; margin-left: 50px;">
+
+        <button type="button" ng-click="addText()" class="btn btn-default">
+            <span class="glyphicon glyphicon-plus-sign"></span> Add
+        </button>
     </div>
 
-    <div class="navbar-header pull-left">
-
-        <div class="dropdown">
-            <a href="#" class="dropdown-toggle">
-                {{nbConnectedUsers | json}} user{{(connectedUsers>1)?'s':''}} connected
-            </a>
-        </div>
+    <div class="navbar-header pull-right" style="margin-top: 15px; margin-right: 50px;">
+        {{nbConnectedUsers | json}} user{{(nbConnectedUsers>1)?'s':''}} connected
     </div>
+
 </div>
 
 <div id="whiteboard">
@@ -69,6 +25,7 @@
                 <div component>
 
                     <div ng-if="component.type == 'text'" text></div>
+                    <div ng-if="component.type == 'youtube'" youtube></div>
 
                 </div>
 

@@ -16,7 +16,7 @@ app.directive('componentContainer', function($document) {
                 element.off('mousedown', scope.onMouseDownOnElement);
             };
         },
-        controller: function($scope, WhiteBoardService, TEXT_COMPONENT_PROPERTIES) {
+        controller: function($scope, WhiteBoardService, COMPONENT_PROPERTIES) {
 
             $scope.isEditMode = (WhiteBoardService.getLastComponentKeyAddedByCurrentUser() === $scope.componentKey);
             $scope.isSelected = false;
@@ -102,20 +102,20 @@ app.directive('componentContainer', function($document) {
 
                 var width = $scope.component.width + (event.pageX - lastX);
 
-                if (width > TEXT_COMPONENT_PROPERTIES.MIN_WIDTH)
+                if (width > COMPONENT_PROPERTIES.MIN_WIDTH)
                     $scope.component.width = width;
                 else
-                    $scope.component.width = TEXT_COMPONENT_PROPERTIES.MIN_WIDTH;
+                    $scope.component.width = COMPONENT_PROPERTIES.MIN_WIDTH;
             };
 
             var onMouseResizeHeight = function (event) {
 
                 var height = $scope.component.height + (event.pageY - lastY);
 
-                if (height > TEXT_COMPONENT_PROPERTIES.MIN_HEIGHT)
+                if (height > COMPONENT_PROPERTIES.MIN_HEIGHT)
                     $scope.component.height = height;
                 else
-                    $scope.component.height = TEXT_COMPONENT_PROPERTIES.MIN_HEIGHT;
+                    $scope.component.height = COMPONENT_PROPERTIES.MIN_HEIGHT;
             };
 
             var onMouseDrag = function (event) {
@@ -182,7 +182,7 @@ app.directive('componentContainer', function($document) {
             $scope.deleteComponent = function () {
 
                 $document.off('keyup', onKeyUp);
-                scope.offMouseDownOnElement();
+                $scope.offMouseDownOnElement();
 
                 $scope.$emit("deleteComponent", $scope.componentKey);
             };

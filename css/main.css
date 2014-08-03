@@ -56,14 +56,9 @@ textarea {
 }
 
 .component {
-    word-break: break-word;
     position: absolute;
     top:0;
     left:0;
-}
-
-.component.selected {
-    border: 1px solid black;
 }
 
 .component {
@@ -74,4 +69,17 @@ textarea {
     position: absolute;
     top:0;
     left:0;
+}
+
+/* Text component */
+
+.text-component {
+    height: 100%;
+    width: 100%;
+    white-space: pre-line;
+    overflow: hidden;
+}
+
+.selected .text-component {
+    border: 1px solid black;
 }
