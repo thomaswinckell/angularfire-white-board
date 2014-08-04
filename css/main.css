@@ -15,10 +15,6 @@ div[ui-view] {
     position: relative;
 }
 
-.not-visible {
-    opacity: 0;
-}
-
 .container{
     max-width: none !important;
     width: 970px;
@@ -26,60 +22,4 @@ div[ui-view] {
 
 textarea {
     resize: none;
-}
-
-
-/* Resizer */
-
-.resizer {
-    position: absolute;
-    opacity: 0;
-}
-
-.resizer-width:hover {
-    cursor: e-resize;
-}
-
-.resizer-height:hover {
-    cursor: n-resize;
-}
-
-.resizer-width.resizer-height:hover {
-    cursor: nwse-resize;
-    opacity: 1;
-}
-
-/* Component */
-
-.container-component {
-    position: absolute;
-}
-
-.component {
-    position: absolute;
-    top:0;
-    left:0;
-}
-
-.component {
-    cursor: pointer;
-}
-
-.component-editor {
-    position: absolute;
-    top:0;
-    left:0;
-}
-
-/* Text component */
-
-.text-component {
-    height: 100%;
-    width: 100%;
-    white-space: pre-line;
-    overflow: hidden;
-}
-
-.selected .text-component {
-    border: 1px solid black;
 }

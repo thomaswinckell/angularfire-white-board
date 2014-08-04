@@ -7,7 +7,12 @@ app.service('WhiteBoardService', function (FIREBASE_URL, $firebase) {
     var indexMaxComponent;
 
     indexMaxComponentRef.on("value", function(snapshot) {
+
         indexMaxComponent = snapshot.val();
+
+        if (_.isUndefined(indexMaxComponent)) {
+            indexMaxComponent = 0;
+        }
     });
 
     /* TODO : $transaction for lock while update */

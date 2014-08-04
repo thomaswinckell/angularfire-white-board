@@ -1,0 +1,21 @@
+/* Component */
+
+.container-component {
+    position: absolute;
+}
+
+.component {
+    position: absolute;
+    top:0;
+    left:0;
+}
+
+.component {
+    cursor: pointer;
+}
+
+.component-editor {
+    position: absolute;
+    top:0;
+    left:0;
+}

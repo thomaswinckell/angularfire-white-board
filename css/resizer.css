@@ -1,0 +1,19 @@
+/* Resizer */
+
+.resizer {
+    position: absolute;
+    opacity: 0;
+}
+
+.resizer-width:hover {
+    cursor: e-resize;
+}
+
+.resizer-height:hover {
+    cursor: n-resize;
+}
+
+.resizer-width.resizer-height:hover {
+    cursor: nwse-resize;
+    opacity: 1;
+}
