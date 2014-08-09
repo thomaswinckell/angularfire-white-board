@@ -1,7 +1,3 @@
-/**
- * Created by Thomas on 03/08/2014.
- */
-
 app.directive('youtube', function() {
     return {
         restrict: 'EA',

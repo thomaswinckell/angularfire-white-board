@@ -1,7 +1,3 @@
-/**
- * Created by Thomas on 08/07/2014.
- */
-
 app.directive('text', function() {
     return {
         restrict: 'EA',

@@ -1,7 +1,3 @@
-/**
- * Created by Thomas on 07/07/2014.
- */
-
 app.directive('componentEditor', function($timeout, $document) {
     return {
         restrict: 'EA',

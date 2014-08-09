@@ -1,7 +1,3 @@
-/**
- * Created by Thomas on 05/07/2014.
- */
-
 app.directive('isVisible', function() {
     return {
         restrict: 'EA',
