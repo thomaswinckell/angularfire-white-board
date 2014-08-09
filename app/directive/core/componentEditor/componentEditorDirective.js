@@ -3,7 +3,6 @@ app.directive('componentEditor', function($timeout, $document) {
         restrict: 'EA',
         transclude: true,
         replace: true,
-        //scope: true,
         templateUrl: 'app/directive/core/componentEditor/componentEditorTemplate.html',
         link: function (scope, element, attrs) {
 
@@ -30,14 +29,6 @@ app.directive('componentEditor', function($timeout, $document) {
                 $scope.setIsEditMode(true);
 
                 $scope.setFocusToComponentEditor();
-            };
-
-            $scope.onComponentEditorKeyDown = function($event) {
-
-                /*if (!$scope.isEditMode) {
-                    $event.preventDefault();
-                    $event.stopPropagation();
-                }*/
             };
         }
     }

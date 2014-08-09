@@ -1,7 +1,5 @@
 <div class="component-editor"
           ng-style="{ height: component.height + 'px', width: component.width + 'px',
             'z-index': isEditMode ? '9999' : 0 }"
-          ng-model="component.value"
-          ng-keydown="onComponentEditorKeyDown($event)"
           is-visible="isEditMode" ng-transclude>
 </div>
