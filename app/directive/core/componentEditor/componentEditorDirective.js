@@ -2,7 +2,7 @@ app.directive('componentEditor', function(COMPONENT_PROPERTIES, $compile, $timeo
     return {
         restrict: 'EA',
         replace: true,
-        require: "^componentContainer",
+        require: "^component",
         templateUrl: 'app/directive/core/componentEditor/componentEditorTemplate.html',
         link: function(scope, element, attrs) {
 

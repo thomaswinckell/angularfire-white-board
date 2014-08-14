@@ -1,7 +1,36 @@
-<div class="component"
-     ng-dblclick="onDoubleClick($event)"
-     ng-mousedown="onMouseDownOnElement($event)"
-     ng-class="{'selected' : isSelected, 'dragging' : isDragging }"
-     ng-style="{ height: component.height + 'px', width: component.width + 'px', 'z-index': isSelected ? 9999 : component.index }"
-     is-visible="!isEditMode">
+<div class="container-component"
+     id="{{componentKey}}"
+     ng-style="{ left: component.x, top: component.y }" >
+
+    <div class="component"
+         ng-dblclick="onDoubleClick($event)"
+         ng-mousedown="onMouseDownOnElement($event)"
+         ng-class="{'selected' : isSelected, 'dragging' : isDragging }"
+         ng-style="{ height: component.height + 'px', width: component.width + 'px', 'z-index': isSelected ? 9999 : component.index }"
+         is-visible="!isEditMode">
+    </div>
+
+    <component-editor></component-editor>
+
+    <div class="resizer resizer-width"
+         ng-style="{'z-index': isSelected ? 9999 : component.index,
+            left: component.width - resizerHorizontalOrVerticalWidth, top: 0,
+            width: resizerHorizontalOrVerticalWidth + 'px',
+            height: (component.height - resizerHorizontalAndVerticalWidth) + 'px' }">
+    </div>
+
+    <div class="resizer resizer-height"
+         ng-style="{'z-index': isSelected ? 9999 : component.index,
+            left: 0, top: component.height - resizerHorizontalOrVerticalWidth,
+            width: (component.width - resizerHorizontalAndVerticalWidth) + 'px',
+            height: resizerHorizontalOrVerticalWidth + 'px' }">
+    </div>
+
+    <div class="resizer resizer-width resizer-height"
+         ng-style="{'z-index': isSelected ? 9999 : component.index,
+            left: component.width - resizerHorizontalAndVerticalWidth,
+            top: component.height - resizerHorizontalAndVerticalWidth,
+            width: resizerHorizontalAndVerticalWidth + 'px',
+            height: resizerHorizontalAndVerticalWidth + 'px' }">
+    </div>
 </div>
