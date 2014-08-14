@@ -2,18 +2,16 @@
 
 .resizer {
     position: absolute;
-    opacity: 0;
 }
 
-.resizer-width:hover {
+.selectable-components .resizer-width:hover {
     cursor: e-resize;
 }
 
-.resizer-height:hover {
+.selectable-components .resizer-height:hover {
     cursor: n-resize;
 }
 
-.resizer-width.resizer-height:hover {
+.selectable-components .resizer-width.resizer-height:hover {
     cursor: nwse-resize;
-    opacity: 1;
 }

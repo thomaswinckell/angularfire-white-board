@@ -17,7 +17,9 @@ app.controller('WhiteBoardController', function ($scope, WhiteBoardService, $doc
         if ((event.keyCode == 17) && event.ctrlKey) {
 
             $scope.$broadcast("enableControlMode");
+            $scope.isControlModeEnabled = true;
             WhiteBoardService.isControlModeEnabled = true;
+            $scope.$apply();
         }
     });
 
@@ -26,7 +28,9 @@ app.controller('WhiteBoardController', function ($scope, WhiteBoardService, $doc
         if ((event.keyCode == 17) && !event.ctrlKey) {
 
             $scope.$broadcast("disableControlMode");
+            $scope.isControlModeEnabled = false;
             WhiteBoardService.isControlModeEnabled = false;
+            $scope.$apply();
         }
     });
 

@@ -4,7 +4,7 @@
     position: absolute;
 }
 
-.container-component-layer {
+.iframe-component-layer {
     position: absolute;
     visibility: hidden;
     top:0;
@@ -21,8 +21,13 @@
     left:0;
 }
 
-.component {
+.selectable-components .component {
     cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
 }
 
 .component-editor {

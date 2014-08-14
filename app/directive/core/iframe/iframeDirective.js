@@ -8,7 +8,7 @@ app.directive('iframe', function() {
 
             var iframe = $(element);
 
-            iframe.after('<div class="container-component-layer"></div>');
+            iframe.after('<div class="iframe-component-layer"></div>');
 
             var layer = iframe.next();
 
