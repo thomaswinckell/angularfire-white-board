@@ -21,7 +21,7 @@ app.directive('componentEditor', function(COMPONENT_PROPERTIES, $compile, $timeo
             if ($scope.isEditMode) {
 
                 $timeout(function () {
-                    $scope.setFocusToComponentEditor();
+                    $scope.onEnterEditMode();
                     $document.on("mouseup", $scope.onBlur);
                 });
             }

@@ -1,4 +1,4 @@
-app.controller('WhiteBoardController', function ($scope, WhiteBoardService, $document, $firebase, $timeout, UserService, $filter) {
+app.controller('WhiteBoardController', function ($scope, WhiteBoardService, $firebase, $timeout, UserService, $filter) {
 
     UserService.getConnectedUsersRef().$bind($scope, "connectedUsers");
     WhiteBoardService.getComponents().$bind($scope, "components");
