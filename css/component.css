@@ -19,6 +19,7 @@
     position: absolute;
     top:0;
     left:0;
+    cursor: default;
 }
 
 .selectable-components .component {
@@ -28,6 +29,10 @@
     -ms-user-select: none;
     -o-user-select: none;
     user-select: none;
+}
+
+.component.dragging {
+    cursor: pointer;
 }
 
 .component-editor {
