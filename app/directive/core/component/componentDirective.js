@@ -202,7 +202,7 @@ app.directive('component', function($compile, COMPONENT_PROPERTIES) {
 
             $scope.onDoubleClick = function(event) {
 
-                if (WhiteBoardService.isControlModeEnabled && !$scope.isEditMode &&
+                if (WhiteBoardService.isControlModeEnabled() && !$scope.isEditMode &&
                     COMPONENT_PROPERTIES.hasEditMode($scope.component.type)) {
 
                     event.preventDefault();
