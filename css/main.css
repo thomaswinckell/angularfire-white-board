@@ -17,6 +17,8 @@ div[ui-view] {
 #whiteboard {
     min-height: 100%;
     position: relative;
+    /*background-image: url('../img/background-grid.jpg');
+    background-repeat: repeat;*/
 }
 
 .container{

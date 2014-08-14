@@ -13,6 +13,9 @@ app.directive('componentContainer', function() {
         },
         controller: function($scope, $document, WhiteBoardService, COMPONENT_PROPERTIES) {
 
+            $scope.resizerHorizontalOrVerticalWidth = COMPONENT_PROPERTIES.resizerHorizontalOrVerticalWidth;
+            $scope.resizerHorizontalAndVerticalWidth = COMPONENT_PROPERTIES.resizerHorizontalAndVerticalWidth;
+
             $scope.isEditMode = (WhiteBoardService.getLastComponentKeyAddedByCurrentUser() === $scope.componentKey);
             $scope.isSelected = false;
             $scope.isDragging = false;
@@ -100,20 +103,20 @@ app.directive('componentContainer', function() {
 
                 var width = $scope.component.width + (event.pageX - lastX);
 
-                if (width > COMPONENT_PROPERTIES.MIN_WIDTH)
+                if (width > COMPONENT_PROPERTIES.minWidth)
                     $scope.component.width = width;
                 else
-                    $scope.component.width = COMPONENT_PROPERTIES.MIN_WIDTH;
+                    $scope.component.width = COMPONENT_PROPERTIES.minWidth;
             };
 
             var onMouseResizeHeight = function (event) {
 
                 var height = $scope.component.height + (event.pageY - lastY);
 
-                if (height > COMPONENT_PROPERTIES.MIN_HEIGHT)
+                if (height > COMPONENT_PROPERTIES.minHeight)
                     $scope.component.height = height;
                 else
-                    $scope.component.height = COMPONENT_PROPERTIES.MIN_HEIGHT;
+                    $scope.component.height = COMPONENT_PROPERTIES.minHeight;
             };
 
             var onMouseDrag = function (event) {

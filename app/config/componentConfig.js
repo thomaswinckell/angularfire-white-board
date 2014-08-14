@@ -1,11 +1,13 @@
 app.constant("COMPONENT_PROPERTIES", {
 
-    MIN_HEIGHT: 100,
-    MIN_WIDTH: 100,
-    DEFAULT_HEIGHT: 200,
-    DEFAULT_WIDTH: 200,
+    minHeight: 100,
+    minWidth: 100,
+    defaultHeight: 200,
+    defaultWidth: 200,
+    resizerHorizontalOrVerticalWidth: 5,
+    resizerHorizontalAndVerticalWidth: 30,
 
-    SUPPORTED_COMPONENTS: {
+    _supportedComponents: {
         text: {},
         youtube: {
             hasNotEditMode: true
@@ -14,6 +16,6 @@ app.constant("COMPONENT_PROPERTIES", {
 
     /* That function is just a useful function but not configurable */
     hasEditMode: function(componentType) {
-        return !this.SUPPORTED_COMPONENTS[componentType].hasNotEditMode;
+        return !this._supportedComponents[componentType].hasNotEditMode;
     }
 });
