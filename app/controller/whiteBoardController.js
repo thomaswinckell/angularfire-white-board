@@ -4,12 +4,30 @@ app.controller('WhiteBoardController', function ($scope, WhiteBoardService, $doc
     WhiteBoardService.getComponents().$bind($scope, "components");
 
     $scope.$watch("connectedUsers", function(val) {
-        $scope.nbConnectedUsers = _.size($filter('cleanFirebaseObject')($scope.connectedUsers));
+        $scope.nbConnectedUsers = _.size($filter('orderByPriority')($scope.connectedUsers));
     });
 
     $scope.$on("deleteComponent", function(event, componentKey) {
         delete $scope.components[componentKey];
         $scope.$apply();
+    });
+
+    angular.element(document).on("keydown", function(event) {
+
+        if ((event.keyCode == 17) && event.ctrlKey) {
+
+            $scope.$broadcast("enableControlMode");
+            WhiteBoardService.isControlModeEnabled = true;
+        }
+    });
+
+    angular.element(document).on("keyup", function(event) {
+
+        if ((event.keyCode == 17) && !event.ctrlKey) {
+
+            $scope.$broadcast("disableControlMode");
+            WhiteBoardService.isControlModeEnabled = false;
+        }
     });
 
     var onClickOnWhiteBoard = function (event) {

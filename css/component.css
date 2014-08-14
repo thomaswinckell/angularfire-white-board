@@ -4,6 +4,17 @@
     position: absolute;
 }
 
+.container-component-layer {
+    position: absolute;
+    visibility: hidden;
+    top:0;
+    left:0;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    background-color: transparent;
+}
+
 .component {
     position: absolute;
     top:0;
@@ -19,3 +30,4 @@
     top:0;
     left:0;
 }
+

@@ -15,6 +15,8 @@ app.service('WhiteBoardService', function (FIREBASE_URL, $firebase) {
         }
     });
 
+    this.isControlModeEnabled = false;
+
     /* TODO : $transaction for lock while update */
     this.getIndexMaxComponent = function() {
 

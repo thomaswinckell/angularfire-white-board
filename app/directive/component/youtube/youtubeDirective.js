@@ -7,10 +7,8 @@ app.directive('youtube', function() {
 
             scope.$watch('component.value', function(val) {
 
-                if (!_.isUndefined(val)) {
-                    element[0].src = "//www.youtube.com/embed/" + val;
-                }
+                scope.iframeSrc = "//www.youtube.com/embed/" + val;
             });
         }
-    }
+    };
 });

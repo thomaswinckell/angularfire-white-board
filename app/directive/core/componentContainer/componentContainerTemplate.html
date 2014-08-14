@@ -2,8 +2,9 @@
      id="{{componentKey}}"
      ng-style="{ left: component.x, top: component.y }" >
 
-    <div ng-transclude>
-    </div>
+    <component></component>
+
+    <component-editor></component-editor>
 
     <div class="resizer resizer-width"
         ng-style="{'z-index': isSelected ? 9999 : component.index,

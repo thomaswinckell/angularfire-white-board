@@ -1,10 +1,9 @@
-app.directive('componentContainer', function($document) {
+app.directive('componentContainer', function() {
     return {
         restrict: 'EA',
         replace: true,
-        transclude: true,
         templateUrl: 'app/directive/core/componentContainer/componentContainerTemplate.html',
-        link: function (scope, element) {
+        link: function (scope, element, attrs) {
 
             element.on('mousedown', scope.onMouseDownOnElement);
 
@@ -12,7 +11,7 @@ app.directive('componentContainer', function($document) {
                 element.off('mousedown', scope.onMouseDownOnElement);
             };
         },
-        controller: function($scope, WhiteBoardService, COMPONENT_PROPERTIES) {
+        controller: function($scope, $document, WhiteBoardService, COMPONENT_PROPERTIES) {
 
             $scope.isEditMode = (WhiteBoardService.getLastComponentKeyAddedByCurrentUser() === $scope.componentKey);
             $scope.isSelected = false;
@@ -20,11 +19,14 @@ app.directive('componentContainer', function($document) {
 
             var lastX, lastY;
 
-            $scope.setIsEditMode = function(isEditMode) {
-                $scope.isEditMode = isEditMode;
+            var isEventOnComponent = function(event) {
+                return $(event.target).parents('#'+$scope.componentKey).length;
             };
 
             $scope.onMouseDownOnElement = function (event) {
+
+                if (!WhiteBoardService.isControlModeEnabled)
+                    return;
 
                 lastX = event.pageX;
                 lastY = event.pageY;
@@ -34,6 +36,7 @@ app.directive('componentContainer', function($document) {
                 if ($(event.target).hasClass("resizer")) {
 
                     event.preventDefault();
+                    event.stopPropagation();
 
                     if ($(event.target).hasClass("resizer-width"))
                         $scope.isResizingWidth = true;
@@ -42,27 +45,26 @@ app.directive('componentContainer', function($document) {
                         $scope.isResizingHeight = true;
 
                     isResizing = true;
-
                 }
 
                 if (!$scope.isEditMode) {
 
-                    event.preventDefault();
-
                     $scope.isSelected = true;
 
                     if (!isResizing) {
+                        /*event.preventDefault();
+                        event.stopPropagation();*/
                         $scope.isDragging = true;
                     }
 
-                    $scope.$apply();
+                    //$scope.$apply();
                 }
 
                 $document.on('mousemove', onMouseMove);
                 $document.on('mouseup', onMouseUp);
             };
 
-            var i = 0; /* TODO : constant or use timeout (should be better) */
+            var i = 0; /* TODO : constant in config or use timeout (should be better) */
 
             var onMouseMove = function(event) {
 
@@ -130,7 +132,7 @@ app.directive('componentContainer', function($document) {
                     $scope.component.y = 0;
             };
 
-            var onMouseUp = function (event) {
+            var onMouseUp = function () {
 
                 if ($scope.isDragging) {
 
@@ -151,22 +153,18 @@ app.directive('componentContainer', function($document) {
                 }
 
                 $document.off('mouseup', onMouseUp);
-                $document.on("mousedown", $scope.onBlur);
+                $document.on("mousedown", onBlur);
 
                 $scope.component.index = WhiteBoardService.getIndexMaxComponent();
 
                 $scope.$apply();
             };
 
-            var isEventOnComponent = function(event) {
-                return $(event.target).parents('#'+$scope.componentKey).length;
-            };
-
-            $scope.onBlur = function(event) {
+            var onBlur = function(event) {
 
                 if (!isEventOnComponent(event)) {
 
-                    $document.off("mousedown", $scope.onBlur);
+                    $document.off("mousedown", onBlur);
 
                     $scope.isEditMode = false;
                     $scope.isSelected = false;
@@ -190,6 +188,12 @@ app.directive('componentContainer', function($document) {
             };
 
             $document.on('keyup', onKeyUp);
+
+            $scope.$on("disableControlMode", function() {
+
+                $scope.isSelected = false;
+                onMouseUp();
+            });
         }
     };
 });

@@ -1,35 +1,30 @@
-app.directive('componentEditor', function($timeout, $document) {
+app.directive('componentEditor', function(COMPONENT_PROPERTIES, $compile, $timeout) {
     return {
         restrict: 'EA',
-        transclude: true,
         replace: true,
+        require: "^componentContainer",
         templateUrl: 'app/directive/core/componentEditor/componentEditorTemplate.html',
-        link: function (scope, element, attrs) {
+        link: function(scope, element, attrs) {
 
-            scope.setFocusToComponentEditor = function() {
+            if (COMPONENT_PROPERTIES.hasEditMode(scope.component.type)) {
+
+                $(element).html($compile('<' + scope.component.type + '-editor></' + scope.component.type + '-editor>')(scope));
+            }
+
+            scope.onEnterEditMode = function () {
 
                 element[0].children[0].focus();
             };
         },
-        controller: function($scope, UserService) {
+        controller: function($scope) {
 
             if ($scope.isEditMode) {
 
-                $timeout(function() {
+                $timeout(function () {
                     $scope.setFocusToComponentEditor();
                     $document.on("mouseup", $scope.onBlur);
                 });
             }
-
-            $scope.onEnterEditMode = function($event) {
-
-                $event.preventDefault();
-                $event.stopPropagation();
-
-                $scope.setIsEditMode(true);
-
-                $scope.setFocusToComponentEditor();
-            };
         }
     }
 });

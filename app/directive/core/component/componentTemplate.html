@@ -1,6 +1,7 @@
-<div class="component"
-     ng-dblclick="onEnterEditMode($event)"
+<div class="component unselectable"
+     ng-dblclick="onDoubleClick($event)"
+     ng-mousedown="onMouseDownOnElement($event)"
      ng-class="{'selected' : isSelected, 'dragging' : isDragging }"
      ng-style="{ height: component.height + 'px', width: component.width + 'px', 'z-index': isSelected ? 9999 : component.index }"
-     is-visible="!isEditMode" ng-transclude>
+     is-visible="!isEditMode">
 </div>

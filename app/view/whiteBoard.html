@@ -12,30 +12,19 @@
     </div>
 
     <div class="navbar-header pull-right" style="margin-top: 15px; margin-right: 50px;">
-        {{nbConnectedUsers | json}} user{{(nbConnectedUsers>1)?'s':''}} connected
+        {{nbConnectedUsers | json}} user{{(nbConnectedUsers > 1) ? 's' : ''}} connected
     </div>
 
 </div>
 
 <div id="whiteboard">
+
     <div ng-repeat="(componentKey, component) in components">
 
-        <div component-container>
+        <component-container></component-container>
 
-                <div component>
-
-                    <div ng-if="component.type == 'text'" text></div>
-                    <div ng-if="component.type == 'youtube'" youtube></div>
-
-                </div>
-
-                <div component-editor>
-
-                    <div ng-if="component.type == 'text'" text-editor></div>
-
-                </div>
-        </div>
     </div>
+
 </div>
 
 <div id="loader" ng-if="nbConnectedUsers == 0">

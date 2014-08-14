@@ -9,8 +9,3 @@ app.constant("AUTHENTICATION", {
         scope: 'https://www.googleapis.com/auth/plus.login'
     }
 });
-
-app.constant("COMPONENT_PROPERTIES", {
-    MIN_HEIGHT: 100,
-    MIN_WIDTH: 100
-});
