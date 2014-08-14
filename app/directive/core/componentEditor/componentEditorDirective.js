@@ -1,4 +1,4 @@
-app.directive('componentEditor', function(COMPONENT_PROPERTIES, $compile, $timeout) {
+app.directive('componentEditor', function(COMPONENT_PROPERTIES, $compile, $timeout, $document) {
     return {
         restrict: 'EA',
         replace: true,

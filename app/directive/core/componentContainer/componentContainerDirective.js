@@ -153,18 +153,18 @@ app.directive('componentContainer', function() {
                 }
 
                 $document.off('mouseup', onMouseUp);
-                $document.on("mousedown", onBlur);
+                $document.on("mousedown", $scope.onBlur);
 
                 $scope.component.index = WhiteBoardService.getIndexMaxComponent();
 
                 $scope.$apply();
             };
 
-            var onBlur = function(event) {
+            $scope.onBlur = function(event) {
 
                 if (!isEventOnComponent(event)) {
 
-                    $document.off("mousedown", onBlur);
+                    $document.off("mousedown", $scope.onBlur);
 
                     $scope.isEditMode = false;
                     $scope.isSelected = false;

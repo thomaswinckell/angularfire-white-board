@@ -1,4 +1,4 @@
-app.controller('WhiteBoardController', function ($scope, WhiteBoardService, $firebase, $timeout, UserService, $filter) {
+app.controller('WhiteBoardController', function ($scope, WhiteBoardService, $document, $firebase, $timeout, UserService, $filter) {
 
     UserService.getConnectedUsersRef().$bind($scope, "connectedUsers");
     WhiteBoardService.getComponents().$bind($scope, "components");
@@ -12,7 +12,7 @@ app.controller('WhiteBoardController', function ($scope, WhiteBoardService, $fir
         $scope.$apply();
     });
 
-    angular.element(document).on("keydown", function(event) {
+    $document.on("keydown", function(event) {
 
         if ((event.keyCode == 17) && event.ctrlKey) {
 
@@ -21,7 +21,7 @@ app.controller('WhiteBoardController', function ($scope, WhiteBoardService, $fir
         }
     });
 
-    angular.element(document).on("keyup", function(event) {
+    $document.on("keyup", function(event) {
 
         if ((event.keyCode == 17) && !event.ctrlKey) {
 
