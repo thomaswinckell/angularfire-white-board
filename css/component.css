@@ -31,6 +31,14 @@
     user-select: none;
 }
 
+.resizer {
+    visibility: hidden;
+}
+
+.selectable-components .resizer {
+    visibility: visible;
+}
+
 .component.dragging {
     cursor: pointer;
 }
