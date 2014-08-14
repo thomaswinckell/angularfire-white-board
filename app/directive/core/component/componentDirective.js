@@ -5,7 +5,9 @@ app.directive('component', function($compile, COMPONENT_PROPERTIES) {
         templateUrl: 'app/directive/core/component/componentTemplate.html',
         link: function(scope, element, attrs) {
 
-            $(element).find('.component').html($compile('<'+scope.component.type+'></'+scope.component.type+'>')(scope));
+            scope.$watch('component.type', function(componentType) {
+                $(element).find('.component').html($compile('<' + componentType + '></' + componentType + '>')(scope));
+            });
 
             element.on('mousedown', scope.onMouseDownOnElement);
 

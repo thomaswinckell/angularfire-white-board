@@ -29,6 +29,7 @@ app.directive('textEditor', function($timeout) {
                     if (componentValue != null) {
                         $scope.component.value = componentValue;
                         $scope.component.type = "youtube";
+                        $scope.isEditMode = false;
                         $timeout(function(){});
                     }
                 }
