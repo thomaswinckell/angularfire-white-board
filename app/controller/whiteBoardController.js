@@ -12,25 +12,47 @@ app.controller('WhiteBoardController', function ($scope, WhiteBoardService, $doc
         $scope.$apply();
     });
 
+    var enableControlMode = function() {
+
+        $scope.$broadcast("enableControlMode");
+        $scope.isControlModeEnabled = true;
+        WhiteBoardService.setControlModeEnabled(true);
+        $scope.$apply();
+    };
+
+    var disableControlMode = function() {
+
+        $scope.$broadcast("disableControlMode");
+        $scope.isControlModeEnabled = false;
+        WhiteBoardService.setControlModeEnabled(false);
+        $scope.$apply();
+    };
+
     $document.on("keydown", function(event) {
 
         if ((event.keyCode == 17) && event.ctrlKey) {
-
-            $scope.$broadcast("enableControlMode");
-            $scope.isControlModeEnabled = true;
-            WhiteBoardService.isControlModeEnabled = true;
-            $scope.$apply();
+            enableControlMode();
         }
     });
 
     $document.on("keyup", function(event) {
 
         if ((event.keyCode == 17) && !event.ctrlKey) {
+            disableControlMode();
+        }
+    });
 
-            $scope.$broadcast("disableControlMode");
-            $scope.isControlModeEnabled = false;
-            WhiteBoardService.isControlModeEnabled = false;
-            $scope.$apply();
+    $document.on('mouseenter', function(event) {
+
+        if ((event.keyCode == 17) && event.ctrlKey) {
+            enableControlMode();
+        }
+    });
+
+    $document.on('mouseleave', function(event) {
+
+        if ((event.keyCode == 17) && !event.ctrlKey) {
+            disableControlMode();
         }
     });
 

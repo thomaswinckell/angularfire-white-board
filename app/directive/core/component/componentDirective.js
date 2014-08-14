@@ -30,7 +30,7 @@ app.directive('component', function($compile, COMPONENT_PROPERTIES) {
 
             $scope.onMouseDownOnElement = function (event) {
 
-                if (!WhiteBoardService.isControlModeEnabled)
+                if (!WhiteBoardService.isControlModeEnabled())
                     return;
 
                 lastX = event.pageX;

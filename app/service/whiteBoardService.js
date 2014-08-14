@@ -15,7 +15,15 @@ app.service('WhiteBoardService', function (FIREBASE_URL, $firebase) {
         }
     });
 
-    this.isControlModeEnabled = false;
+    var controlModeEnabled = false;
+
+    this.setControlModeEnabled = function(isEnabled) {
+        controlModeEnabled = isEnabled;
+    };
+
+    this.isControlModeEnabled = function(event) {
+      return controlModeEnabled;
+    };
 
     /* TODO : $transaction for lock while update */
     this.getIndexMaxComponent = function() {
