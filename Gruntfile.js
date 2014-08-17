@@ -50,7 +50,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-rev');
     grunt.loadNpmTasks('grunt-usemin');
 
-    grunt.registerTask('default', [
+    grunt.registerTask('build', [
         'clean', 'copy', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'rev', 'usemin'
     ]);
 };
