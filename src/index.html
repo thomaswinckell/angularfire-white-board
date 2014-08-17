@@ -6,27 +6,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap-theme.min.css">
 
-    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap-theme.css">
-
-
+    <!-- build:css css/white-board.min.css -->
     <link rel="stylesheet" href="css/main.css" type="text/css"/>
     <link rel="stylesheet" href="css/util.css" type="text/css"/>
     <link rel="stylesheet" href="css/loader.css" type="text/css"/>
     <link rel="stylesheet" href="css/component.css" type="text/css"/>
     <link rel="stylesheet" href="css/resizer.css" type="text/css"/>
     <link rel="stylesheet" href="css/textComponent.css" type="text/css"/>
-
-
-    <script src='lib/firebase/firebase.js'></script>
-    <script src='lib/firebase/firebase-simple-login.js'></script>
-    <script src='lib/jquery/jquery.js'></script>
-    <script src="lib/angular/angular.js"></script>
-    <script src="lib/angular/angularfire.js"></script>
-    <script src="lib/angular/angular-ui-router.js"></script>
-    <script src="lib/underscore/underscore.js"></script>
-    <script src="lib/bootstrap/js/bootstrap.js"></script>
+    <!-- endbuild -->
 
     </head>
 
@@ -34,6 +24,16 @@
 
         <div ui-view></div>
 
+        <script src='lib/firebase/firebase.js'></script>
+        <script src='lib/firebase/firebase-simple-login.js'></script>
+        <script src='lib/jquery/jquery.min.js'></script>
+        <script src="lib/angular/angular.min.js"></script>
+        <script src="lib/angular/angularfire.min.js"></script>
+        <script src="lib/angular/angular-ui-router.min.js"></script>
+        <script src="lib/underscore/underscore.min.js"></script>
+        <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+
+        <!-- build:js js/white-board.min.js -->
         <script src="app/main.js"></script>
 
         <script src="app/config/mainConfig.js"></script>
@@ -57,6 +57,7 @@
         <script src="app/directive/component/textEditor/textEditorDirective.js"></script>
 
         <script src="app/directive/component/youtube/youtubeDirective.js"></script>
+        <!-- endbuild -->
 
     </body>
 </html>

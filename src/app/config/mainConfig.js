@@ -1,4 +1,4 @@
-app.constant("FIREBASE_URL", YOUR_DATABASE_URL);
+app.constant("FIREBASE_URL", "https://brilliant-fire-7355.firebaseio.com/");
 
 app.constant("AUTHENTICATION", {
     enabled : false,
@@ -8,4 +8,8 @@ app.constant("AUTHENTICATION", {
         rememberMe: true,
         scope: 'https://www.googleapis.com/auth/plus.login'
     }
+});
+
+app.constant("WHITE_BOARD_PROPERTIES", {
+    gridWidth: 5
 });
