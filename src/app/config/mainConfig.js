@@ -1,4 +1,4 @@
-app.constant("FIREBASE_URL", "https://test-fire-whiteboard.firebaseio.com/");
+app.constant("FIREBASE_URL", YOUR_DATABASE_URL);
 
 app.constant("AUTHENTICATION", {
 
