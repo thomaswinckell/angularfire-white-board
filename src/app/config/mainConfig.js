@@ -16,10 +16,10 @@ app.constant("WHITE_BOARD_PROPERTIES", {
     gridWidth: 20,
 
     isEnableControlModeEvent: function(event) {
-        return ((event.keyCode == 17) && event.ctrlKey);
+        return ((event.keyCode == 16) && event.shiftKey);
     },
 
     isDisableControlModeEvent: function(event) {
-        return ((event.keyCode == 17) && !event.ctrlKey);
+        return ((event.keyCode == 16) && !event.shiftKey);
     }
 });
