@@ -1,6 +1,7 @@
-app.constant("FIREBASE_URL", YOUR_DATABASE_URL);
+app.constant("FIREBASE_URL", "https://test-fire-whiteboard.firebaseio.com/");
 
 app.constant("AUTHENTICATION", {
+
     enabled : false,
     loginProvider: 'google',
     options: {
@@ -11,5 +12,14 @@ app.constant("AUTHENTICATION", {
 });
 
 app.constant("WHITE_BOARD_PROPERTIES", {
-    gridWidth: 5
+
+    gridWidth: 20,
+
+    isEnableControlModeEvent: function(event) {
+        return ((event.keyCode == 17) && event.ctrlKey);
+    },
+
+    isDisableControlModeEvent: function(event) {
+        return ((event.keyCode == 17) && !event.ctrlKey);
+    }
 });

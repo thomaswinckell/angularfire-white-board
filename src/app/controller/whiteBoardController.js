@@ -1,4 +1,5 @@
-app.controller('WhiteBoardController', function ($scope, WhiteBoardService, $document, $firebase, $timeout, UserService, $filter) {
+app.controller('WhiteBoardController',
+    function ($scope, WhiteBoardService, $document, $firebase, $timeout, UserService, $filter, WHITE_BOARD_PROPERTIES) {
 
     UserService.getConnectedUsersRef().$bind($scope, "connectedUsers");
     WhiteBoardService.getComponents().$bind($scope, "components");
@@ -30,28 +31,28 @@ app.controller('WhiteBoardController', function ($scope, WhiteBoardService, $doc
 
     $document.on("keydown", function(event) {
 
-        if ((event.keyCode == 17) && event.ctrlKey) {
+        if (WHITE_BOARD_PROPERTIES.isEnableControlModeEvent(event)) {
             enableControlMode();
         }
     });
 
     $document.on("keyup", function(event) {
 
-        if ((event.keyCode == 17) && !event.ctrlKey) {
+        if (WHITE_BOARD_PROPERTIES.isDisableControlModeEvent(event)) {
             disableControlMode();
         }
     });
 
     $document.on('mouseenter', function(event) {
 
-        if ((event.keyCode == 17) && event.ctrlKey) {
+        if (WHITE_BOARD_PROPERTIES.isEnableControlModeEvent(event)) {
             enableControlMode();
         }
     });
 
     $document.on('mouseleave', function(event) {
 
-        if ((event.keyCode == 17) && !event.ctrlKey) {
+        if (WHITE_BOARD_PROPERTIES.isDisableControlModeEvent(event)) {
             disableControlMode();
         }
     });

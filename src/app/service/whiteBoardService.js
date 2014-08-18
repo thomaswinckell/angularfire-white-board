@@ -1,4 +1,4 @@
-app.service('WhiteBoardService', function (FIREBASE_URL, $firebase) {
+app.service('WhiteBoardService', function (FIREBASE_URL, $firebase, COMPONENT_PROPERTIES) {
 
     var indexMaxComponentRef = new Firebase(FIREBASE_URL + 'whiteBoard/indexMaxComponent');
     var componentsRef = new Firebase(FIREBASE_URL + 'whiteBoard/components');
@@ -49,7 +49,7 @@ app.service('WhiteBoardService', function (FIREBASE_URL, $firebase) {
             type: 'text',
             x: x, y: y,
             value: "",
-            height: 200, width: 200,
+            height: COMPONENT_PROPERTIES.defaultHeight, width: COMPONENT_PROPERTIES.defaultWidth,
             index: this.getIndexMaxComponent()
         });
     };

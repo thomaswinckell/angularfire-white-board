@@ -4,6 +4,8 @@ app.directive('text', function() {
         replace: true,
         templateUrl: 'app/directive/component/text/textTemplate.html',
         link: function (scope, element, attrs) {
+        },
+        controller: function($scope) {
         }
     }
 });
