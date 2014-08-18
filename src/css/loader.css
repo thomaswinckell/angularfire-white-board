@@ -1,7 +1,7 @@
 /* Loader */
 
 .loader-animation {
-    z-index: 10002;
+    z-index: 2147483647;
     top: 0;
     left: 0;
     right: 0;
@@ -13,7 +13,7 @@
 }
 
 .loader-backdrop {
-    z-index: 10001;
+    z-index: 2147483646;
     top: 0;
     left: 0;
     right: 0;
