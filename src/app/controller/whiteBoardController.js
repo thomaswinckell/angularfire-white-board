@@ -16,7 +16,7 @@ app.controller('WhiteBoardController',
     var enableControlMode = function() {
 
         $scope.$broadcast("enableControlMode");
-        $scope.isControlModeEnabled = true;
+        $("body").addClass("selectable-components");
         WhiteBoardService.setControlModeEnabled(true);
         $scope.$apply();
     };
@@ -24,7 +24,7 @@ app.controller('WhiteBoardController',
     var disableControlMode = function() {
 
         $scope.$broadcast("disableControlMode");
-        $scope.isControlModeEnabled = false;
+        $("body").removeClass("selectable-components");
         WhiteBoardService.setControlModeEnabled(false);
         $scope.$apply();
     };
@@ -47,7 +47,7 @@ app.controller('WhiteBoardController',
 
         if (WHITE_BOARD_PROPERTIES.isEnableControlModeEvent(event)) {
             enableControlMode();
-        } else if ($scope.isControlModeEnabled) {
+        } else if (WhiteBoardService.isControlModeEnabled()) {
             disableControlMode();
         }
     });

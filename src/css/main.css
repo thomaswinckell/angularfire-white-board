@@ -3,7 +3,18 @@ html, body {
 }
 
 body {
-    margin-top: 60px;
+    position: absolute;
+    top: 51px;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+body.selectable-components {
+
+    background-image: url('../img/background-grid.png');
+    background-repeat: repeat;
+    background-position: 0px 51px;
 }
 
 div[ui-view] {
@@ -17,8 +28,6 @@ div[ui-view] {
 #whiteboard {
     min-height: 100%;
     position: relative;
-    /*background-image: url('../img/background-grid.jpg');
-    background-repeat: repeat;*/
 }
 
 .container{
@@ -29,30 +38,3 @@ div[ui-view] {
 textarea {
     resize: none;
 }
-
-/* Show/Hide animation */
-
-/*.ng-hide, .ng-show {
-    -webkit-transition:all linear 0.1s;
-    -moz-transition:all linear 0.1s;
-    -ms-transition:all linear 0.1s;
-    -o-transition:all linear 0.1s;
-    transition:all linear 0.1s;
-    display: block !important;
-}
-
-.ng-show {
-    opacity: 1;
-}
-
-.ng-show.ng-show-active {
-    opacity: 0;
-}
-
-.ng-hide {
-    opacity: 0;
-}
-
-.ng-hide.ng-hide-active {
-    opacity: 1;
-}*/

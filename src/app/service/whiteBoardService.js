@@ -21,7 +21,7 @@ app.service('WhiteBoardService', function (FIREBASE_URL, $firebase, COMPONENT_PR
         controlModeEnabled = isEnabled;
     };
 
-    this.isControlModeEnabled = function(event) {
+    this.isControlModeEnabled = function() {
       return controlModeEnabled;
     };
 
