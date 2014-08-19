@@ -65,6 +65,10 @@ app.directive('component', function($compile, COMPONENT_PROPERTIES) {
                     $scope.isSelected = true;
 
                     if (!isResizing) {
+
+                        event.preventDefault();
+                        event.stopPropagation();
+
                         $scope.isDragging = true;
                     }
                 }
@@ -180,10 +184,13 @@ app.directive('component', function($compile, COMPONENT_PROPERTIES) {
                     $document.off('mousemove', onMouseResizeHeight);
                 }
 
+                if ($scope.isSelected) {
+
+                    $scope.component.index = WhiteBoardService.getIndexMaxComponent();
+                }
+
                 $document.off('mouseup', onMouseUp);
                 $document.on("mousedown", $scope.onBlur);
-
-                $scope.component.index = WhiteBoardService.getIndexMaxComponent();
 
                 $scope.$apply();
             };

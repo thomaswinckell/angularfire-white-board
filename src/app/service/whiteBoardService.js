@@ -25,11 +25,16 @@ app.service('WhiteBoardService', function (FIREBASE_URL, $firebase, COMPONENT_PR
       return controlModeEnabled;
     };
 
-    /* TODO : $transaction for lock while update */
     this.getIndexMaxComponent = function() {
 
-        indexMaxComponentRef.set(indexMaxComponent+1);
-        return indexMaxComponent;
+        var saveIndexMaxComponent = indexMaxComponent;
+
+        indexMaxComponentRef.transaction(function(currentIndexMaxComponent) {
+            indexMaxComponent = currentIndexMaxComponent;
+            return (currentIndexMaxComponent || 0) + 1;
+        });
+
+        return saveIndexMaxComponent;
     };
 
     this.getLastComponentKeyAddedByCurrentUser = function() {
