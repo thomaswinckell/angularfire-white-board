@@ -15,7 +15,6 @@ app.constant("COMPONENT_PROPERTIES", {
     },
 
     isDeleteEvent: function(event) {
-        console.log(event);
         return event.keyCode == 46;
     },
 
