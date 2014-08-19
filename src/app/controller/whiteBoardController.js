@@ -47,6 +47,8 @@ app.controller('WhiteBoardController',
 
         if (WHITE_BOARD_PROPERTIES.isEnableControlModeEvent(event)) {
             enableControlMode();
+        } else if ($scope.isControlModeEnabled) {
+            disableControlMode();
         }
     });
 
