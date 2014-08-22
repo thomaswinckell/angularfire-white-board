@@ -13,10 +13,12 @@ app.controller('WhiteBoardController',
         $scope.$apply();
     });
 
+    /* Control mode management */
+
     var enableControlMode = function() {
 
         $scope.$broadcast("enableControlMode");
-        $("body").addClass("selectable-components");
+        $scope.isControlModeEnabled = true;
         WhiteBoardService.setControlModeEnabled(true);
         $scope.$apply();
     };
@@ -24,7 +26,7 @@ app.controller('WhiteBoardController',
     var disableControlMode = function() {
 
         $scope.$broadcast("disableControlMode");
-        $("body").removeClass("selectable-components");
+        $scope.isControlModeEnabled = false;
         WhiteBoardService.setControlModeEnabled(false);
         $scope.$apply();
     };
@@ -47,7 +49,7 @@ app.controller('WhiteBoardController',
 
         if (WHITE_BOARD_PROPERTIES.isEnableControlModeEvent(event)) {
             enableControlMode();
-        } else if (WhiteBoardService.isControlModeEnabled()) {
+        } else if ($scope.isControlModeEnabled) {
             disableControlMode();
         }
     });
@@ -58,6 +60,8 @@ app.controller('WhiteBoardController',
             disableControlMode();
         }
     });
+
+    /* Component add */
 
     var onClickOnWhiteBoard = function (event) {
 
@@ -85,6 +89,8 @@ app.controller('WhiteBoardController',
         angular.element("#navbar").on('mouseup', onClickOnNavBar);
     };
 
+    /* Navigation bar zoom */
+
     var setNavbarZoom = function(zoom) {
         var h = document.getElementById("navbar");
         h.style.zoom = zoom;
@@ -93,4 +99,41 @@ app.controller('WhiteBoardController',
     setNavbarZoom(window.innerWidth/screen.width);
 
     $(window).resize(function() { setNavbarZoom(window.innerWidth/screen.width); });
+
+    /* White Board Size */
+
+    var getWhiteBoardSize = function() {
+        return { height: $document.height() + 'px', width: $document.width() + 'px' };
+    };
+
+    $scope.$watch(getWhiteBoardSize, function (newWhiteBoardSize) {
+         $scope.whiteBoardSize = newWhiteBoardSize;
+    }, true);
+
+    /* Drag-scrollable white board */
+
+    var startX, startY, startScrollLeft, startScrollTop;
+
+    angular.element("#whiteboard").on('mousedown', function(event) {
+
+        startX = event.screenX;
+        startY = event.screenY;
+        startScrollLeft = $("body").scrollLeft();
+        startScrollTop = $("body").scrollTop();
+
+        angular.element("#whiteboard").on('mousemove', onMouseMove);
+        angular.element("#whiteboard").on('mouseup', onMouseUp);
+    });
+
+    var onMouseMove = function(event) {
+
+        $("body").scrollLeft(startScrollLeft - (event.screenX - startX));
+        $("body").scrollTop(startScrollTop - (event.screenY - startY));
+    };
+
+    var onMouseUp = function(event) {
+
+        angular.element("#whiteboard").off('mousemove', onMouseMove);
+        angular.element("#whiteboard").off('mouseup', onMouseUp);
+    };
 });

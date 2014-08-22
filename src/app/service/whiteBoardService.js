@@ -1,4 +1,4 @@
-app.service('WhiteBoardService', function (FIREBASE_URL, $firebase, COMPONENT_PROPERTIES) {
+app.service('WhiteBoardService', function (FIREBASE_URL, $firebase, COMPONENT_PROPERTIES, WHITE_BOARD_PROPERTIES) {
 
     var indexMaxComponentRef = new Firebase(FIREBASE_URL + 'whiteBoard/indexMaxComponent');
     var componentsRef = new Firebase(FIREBASE_URL + 'whiteBoard/components');
@@ -47,6 +47,10 @@ app.service('WhiteBoardService', function (FIREBASE_URL, $firebase, COMPONENT_PR
 
     this.getComponents = function() {
       return $firebase(componentsRef);
+    };
+
+    this.getWhiteBoardSize = function() {
+        return $firebase(whiteBoardSizeRef);
     };
 
     this.addTextComponent = function(x, y) {

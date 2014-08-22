@@ -1,4 +1,4 @@
-<div id="navbar" class="navbar navbar-default navbar-fixed-top">
+<div id="navbar" class="navbar navbar-default navbar-fixed-top unselectable">
 
     <div class="navbar-header pull-left">
         <a class="navbar-brand" href="#">White Board</a>
@@ -17,7 +17,11 @@
 
 </div>
 
-<div id="whiteboard">
+
+
+<div id="whiteboard" class="unselectable"
+     ng-class="{'selectable-components': isControlModeEnabled}"
+     ng-style="whiteBoardSize">
 
     <div ng-repeat="(componentKey, component) in components">
 
