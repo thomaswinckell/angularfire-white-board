@@ -1,16 +1,17 @@
 #navbar {
     z-index: 2147483645;
+    margin-bottom: 0px;
 }
 
 #whiteboard {
-    position: relative;
-    padding-top: 51px;
+    position: absolute;
+    top: 51px;
 }
 
 #whiteboard.selectable-components {
     background-image: url('../img/background-grid.png');
     background-repeat: repeat;
-    background-position: 0px 51px;
+    background-position: 0px 0px;
 }
 
 .container{

@@ -103,7 +103,7 @@ app.controller('WhiteBoardController',
     /* White Board Size */
 
     var getWhiteBoardSize = function() {
-        return { height: $document.height() + 'px', width: $document.width() + 'px' };
+        return { height: ($document.height() - 51) + 'px', width: $document.width() + 'px' };
     };
 
     $scope.$watch(getWhiteBoardSize, function (newWhiteBoardSize) {
