@@ -82,32 +82,47 @@ app.controller('WhiteBoardController',
         angular.element("#navbar").off('mouseup', onClickOnNavBar);
     };
 
-    /* TODO : add component general function and just pass the type on clicking on text */
     $scope.addText = function() {
 
         angular.element("#whiteboard").on('mouseup', onClickOnWhiteBoard);
         angular.element("#navbar").on('mouseup', onClickOnNavBar);
     };
 
+    /* White board top position */
+
+    $scope.whiteBoardStyle = {};
+
+    var updateWhiteBoardTop = function(zoom) {
+
+        $scope.whiteBoardStyle.top = Math.round($("#navbar").height() * zoom);
+    };
+
     /* Navigation bar zoom */
 
     var setNavbarZoom = function(zoom) {
+
         var h = document.getElementById("navbar");
         h.style.zoom = zoom;
+
+        updateWhiteBoardTop(zoom);
     };
 
     setNavbarZoom(window.innerWidth/screen.width);
 
-    $(window).resize(function() { setNavbarZoom(window.innerWidth/screen.width); });
+    $(window).resize(function() {
+
+        setNavbarZoom(window.innerWidth/screen.width);
+        $scope.$apply();
+    });
 
     /* White Board Size */
 
     var getWhiteBoardSize = function() {
-        return { height: ($document.height() - 51) + 'px', width: $document.width() + 'px' };
+        return { height: ($document.height() - $scope.whiteBoardStyle.top) + 'px', width: $document.width() + 'px' };
     };
 
     $scope.$watch(getWhiteBoardSize, function (newWhiteBoardSize) {
-         $scope.whiteBoardSize = newWhiteBoardSize;
+          angular.extend($scope.whiteBoardStyle, newWhiteBoardSize);
     }, true);
 
     /* Drag-scrollable white board */

@@ -5,7 +5,6 @@
 
 #whiteboard {
     position: absolute;
-    top: 51px;
 }
 
 #whiteboard.selectable-components {
