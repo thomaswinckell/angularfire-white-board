@@ -47,6 +47,8 @@ app.controller('WhiteBoardController',
 
     $document.on('mouseenter', function(event) {
 
+        $("#whiteboard").focus();
+
         if (WHITE_BOARD_PROPERTIES.isEnableControlModeEvent(event)) {
             enableControlMode();
         } else if ($scope.isControlModeEnabled) {
@@ -56,6 +58,8 @@ app.controller('WhiteBoardController',
 
     $document.on('mouseleave', function(event) {
 
+        $("#whiteboard").blur();
+
         if (WHITE_BOARD_PROPERTIES.isDisableControlModeEvent(event)) {
             disableControlMode();
         }
@@ -63,7 +67,7 @@ app.controller('WhiteBoardController',
 
     /* Component add */
 
-    var onClickOnWhiteBoard = function (event) {
+    var onAddComponent = function (event) {
 
         if (event.target.id == "whiteboard") {
 
@@ -73,19 +77,12 @@ app.controller('WhiteBoardController',
             WhiteBoardService.addTextComponent(event.offsetX, event.offsetY);
         }
 
-        angular.element("#whiteboard").off('mouseup', onClickOnWhiteBoard);
-        angular.element("#navbar").off('mouseup', onClickOnNavBar);
-    };
-
-    var onClickOnNavBar = function(event) {
-        angular.element("#whiteboard").off('mouseup', onClickOnWhiteBoard);
-        angular.element("#navbar").off('mouseup', onClickOnNavBar);
+        $document.off('mouseup', onAddComponent);
     };
 
     $scope.addText = function() {
 
-        angular.element("#whiteboard").on('mouseup', onClickOnWhiteBoard);
-        angular.element("#navbar").on('mouseup', onClickOnNavBar);
+        $document.on('mouseup', onAddComponent);
     };
 
     /* White board top position */
@@ -127,28 +124,59 @@ app.controller('WhiteBoardController',
 
     /* Drag-scrollable white board */
 
+    // We do this to avoid scrolling up when drag and scroll up in the navigation bar
+    angular.element("#navbar").on('mousedown', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+    });
+
     var startX, startY, startScrollLeft, startScrollTop;
 
     angular.element("#whiteboard").on('mousedown', function(event) {
+
+        event.preventDefault();
+        event.stopPropagation();
 
         startX = event.screenX;
         startY = event.screenY;
         startScrollLeft = $("body").scrollLeft();
         startScrollTop = $("body").scrollTop();
 
-        angular.element("#whiteboard").on('mousemove', onMouseMove);
-        angular.element("#whiteboard").on('mouseup', onMouseUp);
+        $document.on('mousemove', onMouseMove);
+        $document.on('mouseup', onMouseUp);
     });
 
     var onMouseMove = function(event) {
 
-        $("body").scrollLeft(startScrollLeft - (event.screenX - startX));
-        $("body").scrollTop(startScrollTop - (event.screenY - startY));
+        var newScrollTop = startScrollTop - (event.screenY - startY);
+        var newScrollLeft = startScrollLeft - (event.screenX - startX);
+
+        var scrollHeight = $(document).height() - $(window).height();
+        var scrollWidth = $(document).width() - $(window).width();
+
+        var sizeChanged = false;
+
+        if (scrollHeight < newScrollTop) {
+            $scope.whiteBoardStyle.height = (parseInt($scope.whiteBoardStyle.height) + newScrollTop - scrollHeight) + 'px';
+            sizeChanged = true;
+        }
+
+        if (scrollWidth < newScrollLeft) {
+            $scope.whiteBoardStyle.width = (parseInt($scope.whiteBoardStyle.width) + newScrollLeft - scrollWidth) + 'px';
+            sizeChanged = true;
+        }
+
+        if (sizeChanged) {
+            $scope.$apply();
+        }
+
+        $("body").scrollTop(newScrollTop);
+        $("body").scrollLeft(newScrollLeft);
     };
 
     var onMouseUp = function(event) {
 
-        angular.element("#whiteboard").off('mousemove', onMouseMove);
-        angular.element("#whiteboard").off('mouseup', onMouseUp);
+        $document.off('mousemove', onMouseMove);
+        $document.off('mouseup', onMouseUp);
     };
 });
