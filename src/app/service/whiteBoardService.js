@@ -1,4 +1,4 @@
-app.service('WhiteBoardService', function (FIREBASE_URL, $firebase, COMPONENT_PROPERTIES, WHITE_BOARD_PROPERTIES) {
+app.service('WhiteBoardService', function (FIREBASE_URL, $firebase, COMPONENT_PROPERTIES, u) {
 
     var indexMaxComponentRef = new Firebase(FIREBASE_URL + 'whiteBoard/indexMaxComponent');
     var componentsRef = new Firebase(FIREBASE_URL + 'whiteBoard/components');
@@ -10,7 +10,7 @@ app.service('WhiteBoardService', function (FIREBASE_URL, $firebase, COMPONENT_PR
 
         indexMaxComponent = snapshot.val();
 
-        if (_.isUndefined(indexMaxComponent)) {
+        if (u.isUndefined(indexMaxComponent)) {
             indexMaxComponent = 0;
         }
     });

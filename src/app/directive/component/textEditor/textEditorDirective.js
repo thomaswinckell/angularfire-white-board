@@ -1,4 +1,4 @@
-app.directive('textEditor', function($timeout) {
+app.directive('textEditor', function($timeout, u) {
     return {
         restrict: 'EA',
         replace: true,
@@ -22,7 +22,7 @@ app.directive('textEditor', function($timeout) {
 
             $scope.$watch('component.value', function(val) {
 
-                if (!_.isUndefined(val)) {
+                if (!u.isUndefined(val)) {
 
                     var componentValue = getYoutubeVideoValueByUrl(val);
 

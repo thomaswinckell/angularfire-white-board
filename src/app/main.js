@@ -1,4 +1,4 @@
-var app = angular.module("app", ["ui.router", "firebase"]);
+var app = angular.module("app", ["ui.router", "firebase", "underscore"]);
 
 app.config(function($stateProvider, $urlRouterProvider) {
 

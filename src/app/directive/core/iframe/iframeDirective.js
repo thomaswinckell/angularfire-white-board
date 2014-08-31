@@ -1,4 +1,4 @@
-app.directive('iframe', function() {
+app.directive('iframe', function(u) {
     return {
         restrict: 'E',
         scope: {
@@ -13,7 +13,7 @@ app.directive('iframe', function() {
             var layer = iframe.next();
 
             scope.$watch('iframeSrc', function(iframeSrc) {
-                if (!_.isUndefined(iframeSrc)) {
+                if (!u.isUndefined(iframeSrc)) {
                     element[0].src = iframeSrc;
                 }
             });

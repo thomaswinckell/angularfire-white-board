@@ -1,10 +1,10 @@
 app.controller('MainController',
-    function ($scope, WhiteBoardService, $document, $firebase, $timeout, UserService, $filter, WHITE_BOARD_PROPERTIES) {
+    function ($scope, WhiteBoardService, $document, $firebase, $timeout, UserService, $filter, u) {
 
     UserService.getConnectedUsersRef().$bind($scope, "connectedUsers");
 
     $scope.$watch("connectedUsers", function(val) {
-        $scope.nbConnectedUsers = _.size($filter('orderByPriority')($scope.connectedUsers));
+        $scope.nbConnectedUsers = u.size($filter('orderByPriority')($scope.connectedUsers));
     });
 
     /* Component add */
