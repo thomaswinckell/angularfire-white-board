@@ -14,6 +14,7 @@ app.directive('componentEditor', function(COMPONENT_PROPERTIES, $compile, $timeo
             scope.onEnterEditMode = function () {
 
                 element[0].children[0].focus();
+                $document.on("mouseup", scope.onBlur);
             };
         },
         controller: function($scope) {
@@ -22,7 +23,6 @@ app.directive('componentEditor', function(COMPONENT_PROPERTIES, $compile, $timeo
 
                 $timeout(function () {
                     $scope.onEnterEditMode();
-                    $document.on("mouseup", $scope.onBlur);
                 });
             }
         }

@@ -19,17 +19,7 @@
 
 
 
-<div id="whiteboard" class="unselectable"
-     ng-class="{'selectable-components': isControlModeEnabled}"
-     ng-style="whiteBoardStyle">
-
-    <div ng-repeat="(componentKey, component) in components">
-
-        <component></component>
-
-    </div>
-
-</div>
+<white-board white-board-style="whiteBoardStyle"></white-board>
 
 <div id="loader" ng-if="nbConnectedUsers == 0">
     <div class="loader-animation unselectable">
