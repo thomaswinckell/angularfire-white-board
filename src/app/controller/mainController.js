@@ -1,5 +1,5 @@
 app.controller('MainController',
-    function ($scope, WhiteBoardService, $document, $firebase, $timeout, UserService, $filter, u) {
+    function ($scope, WhiteBoardService, $document, $firebase, $timeout, UserService, $filter, u, WHITE_BOARD_PROPERTIES) {
 
     UserService.getConnectedUsersRef().$bind($scope, "connectedUsers");
 
@@ -21,8 +21,8 @@ app.controller('MainController',
             event.stopPropagation();
 
             $scope.whiteBoardCommands.addComponent({
-                x: event.offsetX,
-                y: event.offsetY,
+                x: event.offsetX - event.offsetX % WHITE_BOARD_PROPERTIES.gridWidth,
+                y: event.offsetY - event.offsetY % WHITE_BOARD_PROPERTIES.gridWidth,
                 type: componentType
             });
         }
