@@ -53,13 +53,15 @@ app.service('WhiteBoardService', function (FIREBASE_URL, $firebase, COMPONENT_PR
         return $firebase(whiteBoardSizeRef);
     };
 
-    this.addTextComponent = function(x, y) {
-        lastComponentRefAddedByCurrentUser = componentsRef.push({
-            type: 'text',
-            x: x, y: y,
-            value: "",
+    this.addComponent = function(component) {
+
+        var newComponent = {
             height: COMPONENT_PROPERTIES.defaultHeight, width: COMPONENT_PROPERTIES.defaultWidth,
             index: this.getIndexMaxComponent()
-        });
+        };
+
+        angular.extend(newComponent, component);
+
+        lastComponentRefAddedByCurrentUser = componentsRef.push(newComponent);
     };
 });

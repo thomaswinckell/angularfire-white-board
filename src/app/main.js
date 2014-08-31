@@ -16,7 +16,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		})
 		.state('root.whiteBoard', {
 			url: "/whiteBoard",
-			templateUrl: "app/view/whiteBoard.html",
+			templateUrl: "app/view/main.html",
 			controller: "MainController"
 		});
 });

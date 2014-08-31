@@ -6,7 +6,7 @@
 
     <div class="navbar-header pull-left" style="margin-top: 8px; margin-left: 50px;">
 
-        <button type="button" ng-click="addText()" class="btn btn-default">
+        <button type="button" ng-click="addComponent('text')" class="btn btn-default">
             <span class="glyphicon glyphicon-plus-sign"></span> Add
         </button>
     </div>
@@ -19,7 +19,7 @@
 
 
 
-<white-board white-board-style="whiteBoardStyle"></white-board>
+<white-board white-board-style="whiteBoardStyle" commands="whiteBoardCommands"></white-board>
 
 <div id="loader" ng-if="nbConnectedUsers == 0">
     <div class="loader-animation unselectable">

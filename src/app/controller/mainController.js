@@ -7,7 +7,11 @@ app.controller('MainController',
         $scope.nbConnectedUsers = u.size($filter('orderByPriority')($scope.connectedUsers));
     });
 
+    $scope.whiteBoardCommands = {};
+
     /* Component add */
+
+    var componentType;
 
     var onAddComponent = function (event) {
 
@@ -16,14 +20,19 @@ app.controller('MainController',
             event.preventDefault();
             event.stopPropagation();
 
-            WhiteBoardService.addTextComponent(event.offsetX, event.offsetY);
+            $scope.whiteBoardCommands.addComponent({
+                x: event.offsetX,
+                y: event.offsetY,
+                type: componentType
+            });
         }
 
         $document.off('mouseup', onAddComponent);
     };
 
-    $scope.addText = function() {
+    $scope.addComponent = function(type) {
 
+        componentType = type;
         $document.on('mouseup', onAddComponent);
     };
 

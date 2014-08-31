@@ -3,7 +3,8 @@ app.directive('whiteBoard', function(WhiteBoardService, WHITE_BOARD_PROPERTIES, 
         restrict: 'EA',
         replace: true,
         scope: {
-            whiteBoardStyle: '='
+            whiteBoardStyle: '=',
+            commands: '='
         },
         templateUrl: 'app/directive/core/whiteBoard/whiteBoardTemplate.html',
         link: function (scope, element, attrs) {
@@ -130,6 +131,11 @@ app.directive('whiteBoard', function(WhiteBoardService, WHITE_BOARD_PROPERTIES, 
             $scope.$watch(getWhiteBoardSize, function (newWhiteBoardSize) {
                 angular.extend($scope.whiteBoardStyle, newWhiteBoardSize);
             }, true);
+
+            $scope.commands.addComponent = function (component) {
+
+                WhiteBoardService.addComponent(component);
+            };
         }
     }
 });
