@@ -1,0 +1,11 @@
+<div id="whiteboard" class="unselectable"
+     ng-class="{'selectable-components': isControlModeEnabled}"
+     ng-style="whiteBoardStyle">
+
+    <div ng-repeat="(componentKey, component) in components">
+
+        <component></component>
+
+    </div>
+
+</div>
