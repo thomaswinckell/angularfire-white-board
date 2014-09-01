@@ -49,3 +49,15 @@
     left:0;
 }
 
+.component-not-selectable-layer {
+    z-index: 2147483644;
+    position: absolute;
+    top:0;
+    left:0;
+    opacity: 0;
+}
+
+.component-not-selectable-layer:hover {
+    background-color:red;
+    opacity:1;
+}

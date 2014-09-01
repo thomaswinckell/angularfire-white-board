@@ -4,7 +4,9 @@ app.directive('whiteBoard', function(WhiteBoardService, WHITE_BOARD_PROPERTIES, 
         replace: true,
         scope: {
             whiteBoardStyle: '=',
-            commands: '='
+            commands: '=',
+            isControlModeEnabled: '=',
+            connectedUsers: '='
         },
         templateUrl: 'app/directive/core/whiteBoard/whiteBoardTemplate.html',
         link: function (scope, element, attrs) {
@@ -16,33 +18,33 @@ app.directive('whiteBoard', function(WhiteBoardService, WHITE_BOARD_PROPERTIES, 
 
             /* Control mode management */
 
-            var enableControlMode = function() {
+            scope.enableControlMode = function() {
 
                 scope.$broadcast("enableControlMode");
                 scope.isControlModeEnabled = true;
                 WhiteBoardService.setControlModeEnabled(true);
-                scope.$apply();
             };
 
-            var disableControlMode = function() {
+            scope.disableControlMode = function() {
 
                 scope.$broadcast("disableControlMode");
                 scope.isControlModeEnabled = false;
                 WhiteBoardService.setControlModeEnabled(false);
-                scope.$apply();
             };
 
             $document.on("keydown", function(event) {
 
                 if (WHITE_BOARD_PROPERTIES.isEnableControlModeEvent(event)) {
-                    enableControlMode();
+                    scope.enableControlMode();
+                    scope.$apply();
                 }
             });
 
             $document.on("keyup", function(event) {
 
                 if (WHITE_BOARD_PROPERTIES.isDisableControlModeEvent(event)) {
-                    disableControlMode();
+                    scope.disableControlMode();
+                    scope.$apply();
                 }
             });
 
@@ -51,9 +53,11 @@ app.directive('whiteBoard', function(WhiteBoardService, WHITE_BOARD_PROPERTIES, 
                 element[0].focus();
 
                 if (WHITE_BOARD_PROPERTIES.isEnableControlModeEvent(event)) {
-                    enableControlMode();
+                    scope.enableControlMode();
+                    scope.$apply();
                 } else if (scope.isControlModeEnabled) {
-                    disableControlMode();
+                    scope.disableControlMode();
+                    scope.$apply();
                 }
             });
 
@@ -62,7 +66,7 @@ app.directive('whiteBoard', function(WhiteBoardService, WHITE_BOARD_PROPERTIES, 
                 element[0].blur();
 
                 if (WHITE_BOARD_PROPERTIES.isDisableControlModeEvent(event)) {
-                    disableControlMode();
+                    scope.disableControlMode();
                 }
             });
 
@@ -135,6 +139,14 @@ app.directive('whiteBoard', function(WhiteBoardService, WHITE_BOARD_PROPERTIES, 
             $scope.commands.addComponent = function (component) {
 
                 WhiteBoardService.addComponent(component);
+            };
+
+            $scope.commands.enableOrDisableControlMode = function() {
+                if ($scope.isControlModeEnabled) {
+                    $scope.disableControlMode();
+                } else {
+                    $scope.enableControlMode();
+                }
             };
         }
     }

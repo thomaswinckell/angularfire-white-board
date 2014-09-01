@@ -9,17 +9,21 @@
         <button type="button" ng-click="addComponent('text')" class="btn btn-default">
             <span class="glyphicon glyphicon-plus-sign"></span> Add
         </button>
+
+        <button type="button" ng-click="whiteBoardCommands.enableOrDisableControlMode()" class="btn btn-default">
+            <span class="glyphicon glyphicon-wrench"></span>
+            {{isControlModeEnabled ? 'Disable' : 'Enable'}} control
+        </button>
     </div>
 
     <div class="navbar-header pull-right" style="margin-top: 15px; margin-right: 50px;">
-        {{nbConnectedUsers | json}} user{{(nbConnectedUsers > 1) ? 's' : ''}} connected
+        {{nbConnectedUsers}} user{{(nbConnectedUsers > 1) ? 's' : ''}} connected
     </div>
 
 </div>
 
-
-
-<white-board white-board-style="whiteBoardStyle" commands="whiteBoardCommands"></white-board>
+<white-board white-board-style="whiteBoardStyle" commands="whiteBoardCommands"
+             is-control-mode-enabled="isControlModeEnabled" connected-users="connectedUsers"></white-board>
 
 <div id="loader" ng-if="nbConnectedUsers == 0">
     <div class="loader-animation unselectable">

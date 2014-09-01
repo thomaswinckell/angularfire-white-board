@@ -1,5 +1,5 @@
 app.controller('MainController',
-    function ($scope, WhiteBoardService, $document, $firebase, $timeout, UserService, $filter, u, WHITE_BOARD_PROPERTIES) {
+    function ($scope, $rootScope, WhiteBoardService, $document, $firebase, $timeout, UserService, $filter, u, WHITE_BOARD_PROPERTIES) {
 
     UserService.getConnectedUsersRef().$bind($scope, "connectedUsers");
 
@@ -8,6 +8,7 @@ app.controller('MainController',
     });
 
     $scope.whiteBoardCommands = {};
+    $scope.isControlModeEnabled = false;
 
     /* Component add */
 

@@ -12,6 +12,12 @@
 
     <component-editor></component-editor>
 
+    <div ng-if="isControlModeEnabled() && component.selectedBy && (component.selectedBy != currentUserKey) && connectedUsers[component.selectedBy]"
+         class="component-not-selectable-layer"
+         ng-style="{ height: component.height + 'px', width: component.width + 'px'}">
+            The component is locked because "{{connectedUsers[component.selectedBy].name}}" is currently editing the component.
+    </div>
+
     <div class="resizer resizer-width"
          ng-style="{'z-index': isSelected ? 2147483644 : component.index,
             left: component.width - resizerHorizontalOrVerticalWidth, top: 0,

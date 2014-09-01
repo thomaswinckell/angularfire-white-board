@@ -16,15 +16,17 @@ app.directive('componentEditor', function(COMPONENT_PROPERTIES, $compile, $timeo
                 element[0].children[0].focus();
                 $document.on("mouseup", scope.onBlur);
             };
+
+            if (scope.isEditMode) {
+
+                $timeout(function () {
+                    scope.onEnterEditMode();
+                });
+            }
         },
         controller: function($scope) {
 
-            if ($scope.isEditMode) {
 
-                $timeout(function () {
-                    $scope.onEnterEditMode();
-                });
-            }
         }
     }
 });
