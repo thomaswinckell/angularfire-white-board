@@ -1,9 +1,14 @@
-app.directive('component', function($compile, $document, WHITE_BOARD_PROPERTIES, WhiteBoardService, COMPONENT_PROPERTIES) {
+app.directive('component', function($compile, $document, WHITE_BOARD_PROPERTIES, WhiteBoardService,
+                                    COMPONENT_PROPERTIES) {
     return {
         restrict: 'EA',
         replace: true,
         templateUrl: 'app/directive/core/component/componentTemplate.html',
         link: function(scope, element, attrs) {
+
+            element.on('blur', function() {
+                console.log('blur');
+            });
 
             scope.$watch('component.type', function(componentType) {
                 $(element).find('.component').html($compile('<' + componentType + '></' + componentType + '>')(scope));
@@ -17,15 +22,32 @@ app.directive('component', function($compile, $document, WHITE_BOARD_PROPERTIES,
 
             /* Drag and drop, resize */
 
-            var startX, startY, startWidth, startHeight, startScreenX, startScreenY;
+            var wasSelected = false;
 
-            var isEventOnComponent = function(event) {
-                return $(event.target).parents('#'+scope.componentKey).length;
+            scope.isSelected = function() {
+
+                if (WhiteBoardService.getSelectedComponent() == scope.componentKey) {
+
+                    wasSelected = true;
+                    return true;
+
+                } else {
+
+                    if (wasSelected) {
+                        scope.isEditMode = false;
+                        scope.component.selectedBy = false;
+                        wasSelected = false;
+                    }
+
+                    return false;
+                }
             };
+
+            var startX, startY, startWidth, startHeight, startScreenX, startScreenY;
 
             scope.onMouseDownOnElement = function (event) {
 
-                if (!WhiteBoardService.isControlModeEnabled())
+                if (!scope.isControlModeEnabled)
                     return;
 
                 startX = event.screenX - scope.component.x;
@@ -55,7 +77,7 @@ app.directive('component', function($compile, $document, WHITE_BOARD_PROPERTIES,
 
                 if (!scope.isEditMode) {
 
-                    scope.isSelected = true;
+                    WhiteBoardService.setSelectedComponent(scope.componentKey);
                     scope.component.selectedBy = scope.currentUserKey;
 
                     element[0].focus();
@@ -180,29 +202,11 @@ app.directive('component', function($compile, $document, WHITE_BOARD_PROPERTIES,
                     $document.off('mousemove', onMouseResizeHeight);
                 }
 
-                if (scope.isSelected) {
-
+                if (scope.isSelected()) {
                     scope.component.index = WhiteBoardService.getIndexMaxComponent();
                 }
 
                 $document.off('mouseup', onMouseUp);
-                $document.on("mousedown", scope.onBlur);
-
-                scope.$apply();
-            };
-
-            scope.onBlur = function(event) {
-
-                if (!isEventOnComponent(event)) {
-
-                    $document.off("mousedown", scope.onBlur);
-
-                    scope.isEditMode = false;
-                    scope.isSelected = false;
-                    scope.component.selectedBy = false;
-
-                    scope.$apply();
-                }
             };
 
             scope.deleteComponent = function () {
@@ -214,34 +218,24 @@ app.directive('component', function($compile, $document, WHITE_BOARD_PROPERTIES,
             };
 
             var onKeyUp = function (event) {
-                if (scope.isSelected && COMPONENT_PROPERTIES.isDeleteEvent(event) && !scope.isEditMode) {
+                if (scope.isSelected() && COMPONENT_PROPERTIES.isDeleteEvent(event) && !scope.isEditMode) {
                     scope.deleteComponent();
                 }
             };
 
             $document.on('keyup', onKeyUp);
-
-            scope.$on("disableControlMode", function() {
-
-                scope.isSelected = false;
-                onMouseUp();
-            });
         },
-        controller: function($scope, UserService) {
+        controller: function($scope) {
 
             $scope.resizerHorizontalOrVerticalWidth = COMPONENT_PROPERTIES.resizerHorizontalOrVerticalWidth;
             $scope.resizerHorizontalAndVerticalWidth = COMPONENT_PROPERTIES.resizerHorizontalAndVerticalWidth;
 
-            $scope.currentUserKey = UserService.getCurrentUserKey();
             $scope.isEditMode = (WhiteBoardService.getLastComponentKeyAddedByCurrentUser() === $scope.componentKey);
-            $scope.isSelected = false;
             $scope.isDragging = false;
-
-            $scope.isControlModeEnabled = WhiteBoardService.isControlModeEnabled;
 
             $scope.onDoubleClick = function(event) {
 
-                if (WhiteBoardService.isControlModeEnabled() && !$scope.isEditMode &&
+                if ($scope.isControlModeEnabled && !$scope.isEditMode &&
                     COMPONENT_PROPERTIES.hasEditMode($scope.component.type)) {
 
                     event.preventDefault();

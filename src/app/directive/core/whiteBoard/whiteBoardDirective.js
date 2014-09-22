@@ -11,26 +11,14 @@ app.directive('whiteBoard', function(WhiteBoardService, WHITE_BOARD_PROPERTIES, 
         templateUrl: 'app/directive/core/whiteBoard/whiteBoardTemplate.html',
         link: function (scope, element, attrs) {
 
+            scope.WhiteBoardService = WhiteBoardService;
+
             scope.$on("deleteComponent", function(event, componentKey) {
                 delete scope.components[componentKey];
                 scope.$apply();
             });
 
             /* Control mode management */
-
-            scope.enableControlMode = function() {
-
-                scope.$broadcast("enableControlMode");
-                scope.isControlModeEnabled = true;
-                WhiteBoardService.setControlModeEnabled(true);
-            };
-
-            scope.disableControlMode = function() {
-
-                scope.$broadcast("disableControlMode");
-                scope.isControlModeEnabled = false;
-                WhiteBoardService.setControlModeEnabled(false);
-            };
 
             $document.on("keydown", function(event) {
 
@@ -79,6 +67,8 @@ app.directive('whiteBoard', function(WhiteBoardService, WHITE_BOARD_PROPERTIES, 
                 event.preventDefault();
                 event.stopPropagation();
 
+                WhiteBoardService.setSelectedComponent(false);
+
                 startX = event.screenX;
                 startY = event.screenY;
                 startScrollLeft = $("body").scrollLeft();
@@ -122,7 +112,9 @@ app.directive('whiteBoard', function(WhiteBoardService, WHITE_BOARD_PROPERTIES, 
                 $document.off('mouseup', onMouseUp);
             };
         },
-        controller: function($scope, WhiteBoardService) {
+        controller: function($scope, WhiteBoardService, UserService, $rootScope) {
+
+            $scope.currentUserKey = UserService.getCurrentUserKey();
 
             WhiteBoardService.getComponents().$bind($scope, "components");
 
@@ -143,9 +135,31 @@ app.directive('whiteBoard', function(WhiteBoardService, WHITE_BOARD_PROPERTIES, 
 
             $scope.commands.enableOrDisableControlMode = function() {
                 if ($scope.isControlModeEnabled) {
-                    $scope.disableControlMode();
+                    $scope.disableControlMode(true);
                 } else {
-                    $scope.enableControlMode();
+                    $scope.enableControlMode(true);
+                }
+            };
+
+            var isControlModeFromCommand = false;
+
+            $scope.enableControlMode = function(isFromCommand) {
+
+                if (isFromCommand || (!isFromCommand && !isControlModeFromCommand)) {
+
+                    isControlModeFromCommand = isFromCommand;
+                    $scope.$broadcast("enableControlMode");
+                    $scope.isControlModeEnabled = true;
+                }
+            };
+
+            $scope.disableControlMode = function(isFromCommand) {
+
+                if (isFromCommand == isControlModeFromCommand) {
+                    isControlModeFromCommand = false;
+                    $scope.$broadcast("disableControlMode");
+                    $scope.isControlModeEnabled = false;
+                    WhiteBoardService.setSelectedComponent(false);
                 }
             };
         }

@@ -2,7 +2,10 @@ app.service('WhiteBoardService', function (FIREBASE_URL, $firebase, COMPONENT_PR
 
     var indexMaxComponentRef = new Firebase(FIREBASE_URL + 'whiteBoard/indexMaxComponent');
     var componentsRef = new Firebase(FIREBASE_URL + 'whiteBoard/components');
+
     var lastComponentRefAddedByCurrentUser = null;
+    var selectedComponent = false;
+    var controlModeEnabled = false;
 
     var indexMaxComponent;
 
@@ -15,14 +18,20 @@ app.service('WhiteBoardService', function (FIREBASE_URL, $firebase, COMPONENT_PR
         }
     });
 
-    var controlModeEnabled = false;
-
     this.setControlModeEnabled = function(isEnabled) {
         controlModeEnabled = isEnabled;
     };
 
     this.isControlModeEnabled = function() {
       return controlModeEnabled;
+    };
+
+    this.setSelectedComponent = function(component) {
+        selectedComponent = component;
+    };
+
+    this.getSelectedComponent = function() {
+        return selectedComponent;
     };
 
     this.getIndexMaxComponent = function() {
@@ -47,10 +56,6 @@ app.service('WhiteBoardService', function (FIREBASE_URL, $firebase, COMPONENT_PR
 
     this.getComponents = function() {
       return $firebase(componentsRef);
-    };
-
-    this.getWhiteBoardSize = function() {
-        return $firebase(whiteBoardSizeRef);
     };
 
     this.addComponent = function(component) {
