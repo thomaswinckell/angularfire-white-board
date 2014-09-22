@@ -6,19 +6,9 @@ app.directive('component', function($compile, $document, WHITE_BOARD_PROPERTIES,
         templateUrl: 'app/directive/core/component/componentTemplate.html',
         link: function(scope, element, attrs) {
 
-            element.on('blur', function() {
-                console.log('blur');
-            });
-
             scope.$watch('component.type', function(componentType) {
                 $(element).find('.component').html($compile('<' + componentType + '></' + componentType + '>')(scope));
             });
-
-            element.on('mousedown', scope.onMouseDownOnElement);
-
-            scope.offMouseDownOnElement = function() {
-                element.off('mousedown', scope.onMouseDownOnElement);
-            };
 
             /* Drag and drop, resize */
 
@@ -212,8 +202,6 @@ app.directive('component', function($compile, $document, WHITE_BOARD_PROPERTIES,
             scope.deleteComponent = function () {
 
                 $document.off('keyup', onKeyUp);
-                scope.offMouseDownOnElement();
-
                 scope.$emit("deleteComponent", scope.componentKey);
             };
 

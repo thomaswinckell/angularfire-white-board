@@ -64,6 +64,9 @@ app.directive('whiteBoard', function(WhiteBoardService, WHITE_BOARD_PROPERTIES, 
 
             element.on('mousedown', function(event) {
 
+                if ($(event.target).hasClass("resizer"))
+                    return;
+
                 event.preventDefault();
                 event.stopPropagation();
 

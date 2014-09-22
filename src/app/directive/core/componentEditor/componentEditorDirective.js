@@ -23,10 +23,6 @@ app.directive('componentEditor', function(COMPONENT_PROPERTIES, $compile, $timeo
                     scope.onEnterEditMode();
                 });
             }
-        },
-        controller: function($scope) {
-
-
         }
     }
 });
