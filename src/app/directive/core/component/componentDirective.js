@@ -33,21 +33,21 @@ app.directive('component', function($compile, $document, WHITE_BOARD_PROPERTIES,
                 }
             };
 
-            var startX, startY, startWidth, startHeight, startScreenX, startScreenY;
+            var startX, startY, startWidth, startHeight, startPageX, startPageY;
 
             scope.onMouseDownOnElement = function (event) {
 
                 if (!scope.isControlModeEnabled)
                     return;
 
-                startX = event.screenX - scope.component.x;
-                startY = event.screenY - scope.component.y;
+                startX = event.pageX - scope.component.x;
+                startY = event.pageY - scope.component.y;
 
                 startWidth = scope.component.width;
                 startHeight = scope.component.height;
 
-                startScreenX = event.screenX;
-                startScreenY = event.screenY;
+                startPageX = event.pageX;
+                startPageY = event.pageY;
 
                 var isResizing = false;
 
@@ -109,7 +109,7 @@ app.directive('component', function($compile, $document, WHITE_BOARD_PROPERTIES,
 
             var onMouseResizeWidth = function (event) {
 
-                var width = startWidth + (event.screenX - startScreenX);
+                var width = startWidth + (event.pageX - startPageX);
 
                 if (Math.abs(scope.component.width - width) >= WHITE_BOARD_PROPERTIES.gridWidth) {
 
@@ -128,7 +128,7 @@ app.directive('component', function($compile, $document, WHITE_BOARD_PROPERTIES,
 
             var onMouseResizeHeight = function (event) {
 
-                var height = startHeight + (event.screenY - startScreenY);
+                var height = startHeight + (event.pageY - startPageY);
 
                 if (Math.abs(scope.component.height - height) >= WHITE_BOARD_PROPERTIES.gridWidth) {
 
@@ -147,8 +147,8 @@ app.directive('component', function($compile, $document, WHITE_BOARD_PROPERTIES,
 
             var onMouseDrag = function (event) {
 
-                var y = event.screenY - startY;
-                var x = event.screenX - startX;
+                var y = event.pageY - startY;
+                var x = event.pageX - startX;
 
                 if ((Math.abs(scope.component.x - x) >= WHITE_BOARD_PROPERTIES.gridWidth) ||
                     (Math.abs(scope.component.y - y) >= WHITE_BOARD_PROPERTIES.gridWidth)) {
