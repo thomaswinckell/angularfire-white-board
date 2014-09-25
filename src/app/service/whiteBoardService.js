@@ -68,5 +68,7 @@ app.service('WhiteBoardService', function (FIREBASE_URL, $firebase, COMPONENT_PR
         angular.extend(newComponent, component);
 
         lastComponentRefAddedByCurrentUser = componentsRef.push(newComponent);
+
+        this.setSelectedComponent(lastComponentRefAddedByCurrentUser.name());
     };
 });

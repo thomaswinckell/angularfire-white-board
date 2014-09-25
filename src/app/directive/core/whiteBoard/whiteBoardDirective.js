@@ -69,6 +69,8 @@ app.directive('whiteBoard', function(WhiteBoardService, WHITE_BOARD_PROPERTIES, 
 
                 WhiteBoardService.setSelectedComponent(false);
 
+                scope.$apply();
+
                 startX = event.screenX;
                 startY = event.screenY;
                 startScrollLeft = $("body").scrollLeft();

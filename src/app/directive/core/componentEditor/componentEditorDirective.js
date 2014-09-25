@@ -14,7 +14,6 @@ app.directive('componentEditor', function(COMPONENT_PROPERTIES, $compile, $timeo
             scope.onEnterEditMode = function () {
 
                 element[0].children[0].focus();
-                $document.on("mouseup", scope.onBlur);
             };
 
             if (scope.isEditMode) {
