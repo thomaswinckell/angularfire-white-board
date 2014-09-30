@@ -280,7 +280,7 @@ app.directive('component', function($compile, $document, WHITE_BOARD_PROPERTIES,
             scope.deleteComponent = function () {
 
                 $document.off('keyup', onKeyUp);
-                scope.$emit("deleteComponent", scope.componentKey);
+                scope.$emit("deleteSelectedComponent");
             };
 
             var onKeyUp = function (event) {

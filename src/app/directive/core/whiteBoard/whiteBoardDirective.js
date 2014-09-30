@@ -13,9 +13,8 @@ app.directive('whiteBoard', function(WhiteBoardService, WHITE_BOARD_PROPERTIES, 
 
             scope.WhiteBoardService = WhiteBoardService;
 
-            scope.$on("deleteComponent", function(event, componentKey) {
-                delete scope.components[componentKey];
-                scope.$apply();
+            scope.$on("deleteSelectedComponent", function(event) {
+                scope.commands.deleteSelectedComponent();
             });
 
             /* Control mode management */
