@@ -144,12 +144,18 @@ app.directive('whiteBoard', function(WhiteBoardService, WHITE_BOARD_PROPERTIES, 
 
             $scope.commands.deleteSelectedComponent = function (needApply) {
 
-                var selectedComponentKey = WhiteBoardService.getSelectedComponent();
+                if (confirm("Are you sure you want to delete this component ?")) {
 
-                if (selectedComponentKey) {
-                    delete $scope.components[selectedComponentKey];
-                    if (needApply) {
-                        $scope.$apply();
+                    var selectedComponentKey = WhiteBoardService.getSelectedComponent();
+
+                    if (selectedComponentKey) {
+
+                        delete $scope.components[selectedComponentKey];
+                        WhiteBoardService.setSelectedComponent(false);
+
+                        if (needApply) {
+                            $scope.$apply();
+                        }
                     }
                 }
             };
