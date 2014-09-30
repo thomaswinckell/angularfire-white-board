@@ -9,6 +9,7 @@ app.controller('MainController',
 
     $scope.whiteBoardCommands = {};
     $scope.isControlModeEnabled = false;
+    $scope.getSelectedComponent = WhiteBoardService.getSelectedComponent;
 
     /* Component add */
 

@@ -139,6 +139,16 @@ app.directive('whiteBoard', function(WhiteBoardService, WHITE_BOARD_PROPERTIES, 
                 WhiteBoardService.addComponent(component);
             };
 
+            $scope.commands.deleteSelectedComponent = function () {
+
+                var selectedComponentKey = WhiteBoardService.getSelectedComponent();
+
+                if (selectedComponentKey) {
+                    delete $scope.components[selectedComponentKey];
+                    $scope.$apply();
+                }
+            };
+
             $scope.commands.enableOrDisableControlMode = function() {
                 if ($scope.isControlModeEnabled) {
                     $scope.disableControlMode(true);

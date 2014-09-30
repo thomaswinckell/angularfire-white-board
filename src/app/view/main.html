@@ -14,6 +14,12 @@
             <span class="glyphicon glyphicon-wrench"></span>
             {{isControlModeEnabled ? 'Disable' : 'Enable'}} control
         </button>
+
+        <button type="button" ng-click="whiteBoardCommands.deleteSelectedComponent()" class="btn btn-default"
+                ng-disabled="!getSelectedComponent()">
+            <span class="glyphicon glyphicon-remove"></span> Delete
+        </button>
+
     </div>
 
     <div class="navbar-header pull-right" style="margin-top: 15px; margin-right: 50px;">
