@@ -1,5 +1,5 @@
 app.directive('component', function($compile, $document, WHITE_BOARD_PROPERTIES, WhiteBoardService,
-                                    COMPONENT_PROPERTIES) {
+                                    COMPONENT_PROPERTIES, $timeout) {
     return {
         restrict: 'EA',
         replace: true,
@@ -145,7 +145,76 @@ app.directive('component', function($compile, $document, WHITE_BOARD_PROPERTIES,
                 return false;
             };
 
+            var lastTimeoutScrollLeft = false, lastTimeoutScrollTop = false;
+
+            var scrollLeft = function(negativeScroll) {
+
+                scope.component.x = negativeScroll ? scope.component.x - 50 : scope.component.x + 50;
+
+                if (scope.component.x < 0) {
+                    scope.component.x = 0;
+                    return;
+                }
+
+                $("body").scrollLeft(negativeScroll ? $("body").scrollLeft() - 50 : $("body").scrollLeft() + 50);
+
+                lastTimeoutScrollLeft = $timeout(function () {
+                    if (scope.isDragging) {
+                        scrollLeft(negativeScroll);
+                    }
+                }, 100);
+            };
+
+            var scrollTop = function(negativeScroll) {
+
+                scope.component.y = negativeScroll ? scope.component.y - 50 : scope.component.y + 50;
+
+                if (scope.component.y < 0) {
+                    scope.component.y = 0;
+                    return;
+                }
+
+                $("body").scrollTop(negativeScroll ? $("body").scrollTop() - 50 : $("body").scrollTop() + 50);
+
+                lastTimeoutScrollTop = $timeout(function () {
+                    if (scope.isDragging) {
+                        scrollTop(negativeScroll);
+                    }
+                }, 100);
+            };
+
+            var clearScrollTimeouts = function() {
+
+                if (lastTimeoutScrollLeft) {
+                    $timeout.cancel(lastTimeoutScrollLeft);
+                }
+
+                if (lastTimeoutScrollTop) {
+                    $timeout.cancel(lastTimeoutScrollTop);
+                }
+            };
+
             var onMouseDrag = function (event) {
+
+                clearScrollTimeouts();
+
+                if  ((event.clientX + 50) >= $(window).width()) {
+
+                    scrollLeft(false);
+
+                } else if ((event.clientX - 50) <= 0) {
+
+                    scrollLeft(true);
+                }
+
+                if  ((event.clientY + 50) >= $(window).height()) {
+
+                    scrollTop(false);
+
+                } else if ((event.clientY - 50) <= 0) {
+
+                    scrollTop(true);
+                }
 
                 var y = event.pageY - startY;
                 var x = event.pageX - startX;
