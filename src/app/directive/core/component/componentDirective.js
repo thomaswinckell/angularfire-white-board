@@ -321,6 +321,12 @@ app.directive('component', function($compile, $document, WHITE_BOARD_PROPERTIES,
             };
 
             $document.on('keyup', onKeyUp);
+
+            scope.$on('editSelectedComponent', function(event) {
+                if (scope.isSelected()) {
+                    scope.onEditComponent(event);
+                }
+            });
         },
         controller: function($scope) {
 
@@ -330,13 +336,12 @@ app.directive('component', function($compile, $document, WHITE_BOARD_PROPERTIES,
             $scope.isEditMode = (WhiteBoardService.getLastComponentKeyAddedByCurrentUser() === $scope.componentKey);
             $scope.isDragging = false;
 
-            $scope.onDoubleClick = function(event) {
+            $scope.onEditComponent = function(event) {
 
                 if ($scope.isControlModeEnabled && !$scope.isEditMode &&
                     COMPONENT_PROPERTIES.hasEditMode($scope.component.type)) {
 
                     event.preventDefault();
-                    event.stopPropagation();
 
                     $scope.isEditMode = true;
                     $scope.onEnterEditMode();

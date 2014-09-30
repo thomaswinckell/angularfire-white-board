@@ -14,7 +14,7 @@ app.directive('whiteBoard', function(WhiteBoardService, WHITE_BOARD_PROPERTIES, 
             scope.WhiteBoardService = WhiteBoardService;
 
             scope.$on("deleteSelectedComponent", function(event) {
-                scope.commands.deleteSelectedComponent();
+                scope.commands.deleteSelectedComponent(true);
             });
 
             /* Control mode management */
@@ -138,13 +138,19 @@ app.directive('whiteBoard', function(WhiteBoardService, WHITE_BOARD_PROPERTIES, 
                 WhiteBoardService.addComponent(component);
             };
 
-            $scope.commands.deleteSelectedComponent = function () {
+            $scope.commands.editSelectedComponent = function () {
+                $scope.$broadcast('editSelectedComponent');
+            };
+
+            $scope.commands.deleteSelectedComponent = function (needApply) {
 
                 var selectedComponentKey = WhiteBoardService.getSelectedComponent();
 
                 if (selectedComponentKey) {
                     delete $scope.components[selectedComponentKey];
-                    $scope.$apply();
+                    if (needApply) {
+                        $scope.$apply();
+                    }
                 }
             };
 

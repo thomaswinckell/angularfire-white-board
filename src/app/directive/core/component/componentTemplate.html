@@ -4,7 +4,7 @@
      ng-style="{ left: component.x, top: component.y }" >
 
     <div class="component"
-         ng-dblclick="onDoubleClick($event)"
+         ng-dblclick="onEditComponent($event)"
          ng-class="{'selected' : isSelected(), 'dragging' : isDragging }"
          ng-style="{ height: component.height + 'px', width: component.width + 'px', 'z-index': isSelected() ? 2147483644 : component.index }"
          is-visible="!isEditMode">
