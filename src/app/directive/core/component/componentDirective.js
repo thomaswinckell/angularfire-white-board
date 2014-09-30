@@ -10,6 +10,20 @@ app.directive('component', function($compile, $document, WHITE_BOARD_PROPERTIES,
                 $(element).find('.component').html($compile('<' + componentType + '></' + componentType + '>')(scope));
             });
 
+            var setComponentX = function(newX) {
+                if (newX > 0)
+                    scope.component.x = newX;
+                else
+                    scope.component.x = 0;
+            };
+
+            var setComponentY = function(newY) {
+                if (newY > 0)
+                    scope.component.y = newY;
+                else
+                    scope.component.y = 0;
+            };
+
             /* Drag and drop, resize */
 
             var wasSelected = false;
@@ -151,14 +165,14 @@ app.directive('component', function($compile, $document, WHITE_BOARD_PROPERTIES,
 
             var scrollLeft = function(negativeScroll) {
 
-                scope.component.x = negativeScroll ? scope.component.x - 50 : scope.component.x + 50;
+                scope.component.x = negativeScroll ? scope.component.x - COMPONENT_PROPERTIES.spaceBetweenBorderToLaunchScroll : scope.component.x + COMPONENT_PROPERTIES.spaceBetweenBorderToLaunchScroll;
 
                 if (scope.component.x < 0) {
                     scope.component.x = 0;
                     return;
                 }
 
-                $("body").scrollLeft(negativeScroll ? $("body").scrollLeft() - 50 : $("body").scrollLeft() + 50);
+                $("body").scrollLeft(negativeScroll ? $("body").scrollLeft() - COMPONENT_PROPERTIES.spaceBetweenBorderToLaunchScroll : $("body").scrollLeft() + COMPONENT_PROPERTIES.spaceBetweenBorderToLaunchScroll);
 
                 lastTimeoutScrollLeft = $timeout(function () {
                     if (scope.isDragging) {
@@ -169,14 +183,14 @@ app.directive('component', function($compile, $document, WHITE_BOARD_PROPERTIES,
 
             var scrollTop = function(negativeScroll) {
 
-                scope.component.y = negativeScroll ? scope.component.y - 50 : scope.component.y + 50;
+                scope.component.y = negativeScroll ? scope.component.y - COMPONENT_PROPERTIES.spaceBetweenBorderToLaunchScroll : scope.component.y + COMPONENT_PROPERTIES.spaceBetweenBorderToLaunchScroll;
 
                 if (scope.component.y < 0) {
                     scope.component.y = 0;
                     return;
                 }
 
-                $("body").scrollTop(negativeScroll ? $("body").scrollTop() - 50 : $("body").scrollTop() + 50);
+                $("body").scrollTop(negativeScroll ? $("body").scrollTop() - COMPONENT_PROPERTIES.spaceBetweenBorderToLaunchScroll : $("body").scrollTop() + COMPONENT_PROPERTIES.spaceBetweenBorderToLaunchScroll);
 
                 lastTimeoutScrollTop = $timeout(function () {
                     if (scope.isDragging) {
@@ -200,20 +214,20 @@ app.directive('component', function($compile, $document, WHITE_BOARD_PROPERTIES,
 
                 clearScrollTimeouts();
 
-                if  ((event.clientX + 50) >= $(window).width()) {
+                if  ((event.clientX + COMPONENT_PROPERTIES.spaceBetweenBorderToLaunchScroll) >= $(window).width()) {
 
                     scrollLeft(false);
 
-                } else if ((event.clientX - 50) <= 0) {
+                } else if ((event.clientX - COMPONENT_PROPERTIES.spaceBetweenBorderToLaunchScroll) <= 0) {
 
                     scrollLeft(true);
                 }
 
-                if  ((event.clientY + 50) >= $(window).height()) {
+                if  ((event.clientY + COMPONENT_PROPERTIES.spaceBetweenBorderToLaunchScroll) >= $(window).height()) {
 
                     scrollTop(false);
 
-                } else if ((event.clientY - 50) <= 0) {
+                } else if ((event.clientY - COMPONENT_PROPERTIES.spaceBetweenBorderToLaunchScroll) <= 0) {
 
                     scrollTop(true);
                 }
@@ -227,15 +241,8 @@ app.directive('component', function($compile, $document, WHITE_BOARD_PROPERTIES,
                     x = x - x % WHITE_BOARD_PROPERTIES.gridWidth;
                     y = y - y % WHITE_BOARD_PROPERTIES.gridWidth;
 
-                    if (x > 0)
-                        scope.component.x = x;
-                    else
-                        scope.component.x = 0;
-
-                    if (y > 0)
-                        scope.component.y = y;
-                    else
-                        scope.component.y = 0;
+                    setComponentX(x);
+                    setComponentY(y);
 
                     return true;
                 }
@@ -277,8 +284,39 @@ app.directive('component', function($compile, $document, WHITE_BOARD_PROPERTIES,
             };
 
             var onKeyUp = function (event) {
-                if (scope.isSelected() && COMPONENT_PROPERTIES.isDeleteEvent(event) && !scope.isEditMode) {
-                    scope.deleteComponent();
+
+                if (scope.isSelected() && !scope.isEditMode) {
+
+                    if (COMPONENT_PROPERTIES.isDeleteEvent(event)) {
+                        scope.deleteComponent();
+                        return;
+                    }
+
+                    if (COMPONENT_PROPERTIES.isMoveEvent(event)) {
+
+                        event.preventDefault();
+                        event.stopPropagation();
+
+                        if (COMPONENT_PROPERTIES.isMoveUpEvent(event)) {
+                            setComponentY(scope.component.y - WHITE_BOARD_PROPERTIES.gridWidth);
+                        }
+
+                        if (COMPONENT_PROPERTIES.isMoveDownEvent(event)) {
+                            setComponentY(scope.component.y + WHITE_BOARD_PROPERTIES.gridWidth);
+                        }
+
+                        if (COMPONENT_PROPERTIES.isMoveLeftEvent(event)) {
+                            setComponentX(scope.component.x - WHITE_BOARD_PROPERTIES.gridWidth);
+                        }
+
+                        if (COMPONENT_PROPERTIES.isMoveRightEvent(event)) {
+                            setComponentX(scope.component.x + WHITE_BOARD_PROPERTIES.gridWidth);
+                        }
+
+                        scope.$apply();
+
+                        return;
+                    }
                 }
             };
 

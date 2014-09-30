@@ -1,3 +1,7 @@
+body {
+    overflow: hidden;
+}
+
 #navbar {
     z-index: 2147483645;
     margin-bottom: 0px;
