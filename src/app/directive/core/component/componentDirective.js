@@ -81,8 +81,10 @@ app.directive('component', function($compile, $document, WHITE_BOARD_PROPERTIES,
                     }
                 }
 
-                $document.on('mousemove', onMouseMove);
-                $document.on('mouseup', onMouseUp);
+                if (!scope.isEditMode || (scope.isResizingWidth || scope.isResizingHeight)) {
+                    $document.on('mousemove', onMouseMove);
+                    $document.on('mouseup', onMouseUp);
+                }
             };
 
             var onMouseMove = function(event) {

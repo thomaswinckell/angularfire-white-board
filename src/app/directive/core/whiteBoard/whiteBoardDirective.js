@@ -64,6 +64,10 @@ app.directive('whiteBoard', function(WhiteBoardService, WHITE_BOARD_PROPERTIES, 
 
             element.on('mousedown', function(event) {
 
+                if ($(event.target).parents('.container-component').length) {
+                    return;
+                }
+
                 event.preventDefault();
                 event.stopPropagation();
 
